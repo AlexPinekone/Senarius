@@ -1,0 +1,209 @@
+[gd_scene load_steps=7 format=3 uid="uid://v0uc2yko34gl"]
+
+[ext_resource type="Script" uid="uid://bdg4iibow25if" path="res://src/scripts/hexagonal_tiles.gd" id="2_ihm57"]
+[ext_resource type="Shader" uid="uid://b4yhybxijnkyx" path="res://src/shaders/baseMap.gdshader" id="3_q1pjq"]
+[ext_resource type="PackedScene" uid="uid://cb6m1sjbf1232" path="res://src/scenes/tile.tscn" id="4_ihm57"]
+[ext_resource type="PackedScene" uid="uid://dbmj571b7eoxy" path="res://src/scenes/player.tscn" id="4_xkm8x"]
+[ext_resource type="Script" uid="uid://cf0y6du8k1ul6" path="res://src/scripts/game_manager.gd" id="5_xkm8x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hn2dp"]
+shader = ExtResource("3_q1pjq")
+shader_parameter/polar_coordinates = false
+shader_parameter/polar_center = Vector2(0.5, 0.5)
+shader_parameter/polar_zoom = 1.0
+shader_parameter/polar_repeat = 1.0
+shader_parameter/spin_rotation = 0.0
+shader_parameter/spin_speed = 4.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/colour_1 = Color(1, 0, 0, 1)
+shader_parameter/colour_2 = Color(0.321569, 0, 0.462745, 1)
+shader_parameter/colour_3 = Color(0, 0, 0, 1)
+shader_parameter/contrast = 2.0
+shader_parameter/spin_amount = 0.36
+shader_parameter/pixel_filter = 700.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Fondo" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_hn2dp")
+offset_left = -635.0
+offset_top = -303.0
+offset_right = 750.0
+offset_bottom = 479.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(54, 93)
+zoom = Vector2(0.5, 0.5)
+
+[node name="HexagonalTiles" type="Node2D" parent="."]
+script = ExtResource("2_ihm57")
+
+[node name="T00" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-178, -94)
+
+[node name="T01" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-178, 0)
+
+[node name="T02" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-178, 94)
+
+[node name="T03" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-178, 188)
+
+[node name="T04" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-178, 282)
+
+[node name="T10" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-102, -141)
+
+[node name="T11" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-102, -47)
+
+[node name="T12" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-102, 47)
+
+[node name="T13" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-102, 141)
+
+[node name="T14" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-102, 235)
+
+[node name="T15" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-102, 329)
+
+[node name="T20" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-26, -94)
+
+[node name="T21" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-26, 0)
+
+[node name="T22" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-26, 94)
+
+[node name="T23" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-26, 188)
+
+[node name="T24" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-26, 282)
+
+[node name="T30" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(50, -141)
+
+[node name="T31" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(50, -47)
+
+[node name="T32" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(50, 47)
+
+[node name="T33" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(50, 141)
+
+[node name="T34" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(50, 235)
+
+[node name="T35" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(50, 329)
+
+[node name="T40" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(126, -94)
+
+[node name="T41" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(126, 0)
+
+[node name="T42" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(126, 94)
+
+[node name="T43" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(126, 188)
+
+[node name="T44" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(126, 282)
+
+[node name="T50" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(202, -141)
+
+[node name="T51" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(202, -47)
+
+[node name="T52" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(202, 47)
+
+[node name="T53" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(202, 141)
+
+[node name="T54" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(202, 235)
+
+[node name="T55" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(202, 329)
+
+[node name="T60" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(278, -94)
+
+[node name="T61" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(278, 0)
+
+[node name="T62" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(278, 94)
+
+[node name="T63" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(278, 188)
+
+[node name="T64" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(278, 282)
+
+[node name="Player" parent="." instance=ExtResource("4_xkm8x")]
+position = Vector2(-289, -210)
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="HealthLabel" type="Label" parent="UI"]
+offset_left = -515.0
+offset_top = -186.0
+offset_right = -342.0
+offset_bottom = -131.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 40
+text = "Health: 6"
+horizontal_alignment = 1
+
+[node name="AttackLabel3" type="Label" parent="UI"]
+offset_left = -514.0
+offset_top = -98.0
+offset_right = -341.0
+offset_bottom = -43.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 40
+text = "Attack: 6"
+horizontal_alignment = 1
+
+[node name="SpeedLabel5" type="Label" parent="UI"]
+offset_left = -514.0
+offset_top = -14.0
+offset_right = -341.0
+offset_bottom = 41.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 40
+text = "Speed: x1"
+horizontal_alignment = 1
+
+[node name="CriticalLabel2" type="Label" parent="UI"]
+offset_left = -517.0
+offset_top = 72.0
+offset_right = -338.0
+offset_bottom = 127.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 40
+text = "Critical: 1%"
+horizontal_alignment = 1
+
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("5_xkm8x")

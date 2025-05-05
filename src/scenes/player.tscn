@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbmj571b7eoxy"]
+
+[ext_resource type="Script" uid="uid://bfibvm58e2gp7" path="res://src/scenes/player.gd" id="1_cusn3"]
+[ext_resource type="Texture2D" uid="uid://canl870weld46" path="res://src/tiles/hex_grid.png" id="2_v4rts"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v4rts"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cusn3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwyk6"]
+atlas = ExtResource("2_v4rts")
+region = Rect2(9, 8, 110, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l2v1k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwyk6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v4rts")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_cusn3")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+shape = SubResource("CircleShape2D_cusn3")
+target_position = Vector2(0, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_l2v1k")
