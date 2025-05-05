@@ -1,6 +1,7 @@
 extends Node2D
 @onready var button: Button = $Button
 @onready var label: Label = $Button/SubViewportContainer/SubViewport/Label
+@onready var audio_movement: AudioStreamPlayer2D = $AudioMovement
 var ValueX;
 var ValueY;
 
@@ -29,3 +30,4 @@ func changeContent(content: String, type: String, m: int) -> void:
 func _on_button_pressed() -> void:
 	Global.pressed = true;
 	Global.posPressed = Vector2(ValueX, ValueY)
+	audio_movement.play(0.65)

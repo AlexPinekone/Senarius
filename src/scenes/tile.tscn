@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cb6m1sjbf1232"]
+[gd_scene load_steps=11 format=3 uid="uid://cb6m1sjbf1232"]
 
 [ext_resource type="Script" uid="uid://o801vurq62ic" path="res://src/scripts/tile.gd" id="1_3cgyk"]
 [ext_resource type="Texture2D" uid="uid://canl870weld46" path="res://src/tiles/hex_grid.png" id="1_33s04"]
 [ext_resource type="Shader" uid="uid://di1w5mdv4gsau" path="res://src/shaders/fake_3d.gdshader" id="1_cijmj"]
 [ext_resource type="Script" uid="uid://dq6lv7610aeey" path="res://src/scripts/tileItself.gd" id="1_lvqq3"]
 [ext_resource type="AudioStream" uid="uid://ddag0jreql1lf" path="res://src/sounds/key.wav" id="5_h3bi2"]
+[ext_resource type="AudioStream" uid="uid://gmp628x2naxa" path="res://src/sounds/Click-Sound-Effect-_HD_.wav" id="5_masbt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cijmj"]
 shader = ExtResource("1_cijmj")
@@ -73,6 +74,9 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 40
+
+[node name="AudioMovement" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_masbt")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_h3bi2")

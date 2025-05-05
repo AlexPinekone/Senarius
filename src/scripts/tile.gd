@@ -8,7 +8,6 @@ var original_y_rot := 0.0
 @onready var sprite2d: AnimatedSprite2D = $SubViewportContainer/SubViewport/AnimatedSprite2D
 @onready var audio: AudioStreamPlayer2D = $"../AudioStreamPlayer2D"
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	shader_material = shader_material.duplicate()

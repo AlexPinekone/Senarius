@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://v0uc2yko34gl"]
+[gd_scene load_steps=9 format=3 uid="uid://v0uc2yko34gl"]
 
 [ext_resource type="Script" uid="uid://bdg4iibow25if" path="res://src/scripts/hexagonal_tiles.gd" id="2_ihm57"]
 [ext_resource type="Shader" uid="uid://b4yhybxijnkyx" path="res://src/shaders/baseMap.gdshader" id="3_q1pjq"]
 [ext_resource type="PackedScene" uid="uid://cb6m1sjbf1232" path="res://src/scenes/tile.tscn" id="4_ihm57"]
 [ext_resource type="PackedScene" uid="uid://dbmj571b7eoxy" path="res://src/scenes/player.tscn" id="4_xkm8x"]
+[ext_resource type="FontFile" uid="uid://bwtx2jrfpi5wi" path="res://src/fonts/KiriFont.otf" id="5_gs3hw"]
 [ext_resource type="Script" uid="uid://cf0y6du8k1ul6" path="res://src/scripts/game_manager.gd" id="5_xkm8x"]
+[ext_resource type="AudioStream" uid="uid://1jmyr2wxnjp0" path="res://src/sounds/Ulrich-Schnauss-Nothing-Happens-in-June.wav" id="6_y68mb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hn2dp"]
 shader = ExtResource("3_q1pjq")
@@ -26,13 +28,13 @@ shader_parameter/pixel_filter = 700.0
 
 [node name="Fondo" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_hn2dp")
-offset_left = -635.0
+offset_left = -829.0
 offset_top = -303.0
-offset_right = 750.0
+offset_right = 556.0
 offset_bottom = 479.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(54, 93)
+position = Vector2(-140, 93)
 zoom = Vector2(0.5, 0.5)
 
 [node name="HexagonalTiles" type="Node2D" parent="."]
@@ -153,57 +155,85 @@ position = Vector2(278, 188)
 position = Vector2(278, 282)
 
 [node name="Player" parent="." instance=ExtResource("4_xkm8x")]
-position = Vector2(-289, -210)
+position = Vector2(-510, -149)
 
 [node name="UI" type="Node2D" parent="."]
 
-[node name="HealthLabel" type="Label" parent="UI"]
-offset_left = -515.0
-offset_top = -186.0
-offset_right = -342.0
-offset_bottom = -131.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+[node name="Health" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -667.0
+offset_top = 65.0
+offset_right = -467.0
+offset_bottom = 115.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 40
-text = "Health: 6"
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Health: [color=#ffffff88]6[/color][/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="AttackLabel3" type="Label" parent="UI"]
-offset_left = -514.0
-offset_top = -98.0
-offset_right = -341.0
-offset_bottom = -43.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+[node name="Attack" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -666.0
+offset_top = 138.0
+offset_right = -466.0
+offset_bottom = 188.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 40
-text = "Attack: 6"
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Attack: [color=#ffffff88]1[/color][/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="SpeedLabel5" type="Label" parent="UI"]
-offset_left = -514.0
-offset_top = -14.0
-offset_right = -341.0
-offset_bottom = 41.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+[node name="Speed" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -668.0
+offset_top = 223.0
+offset_right = -468.0
+offset_bottom = 273.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 40
-text = "Speed: x1"
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Speed: [color=#ffffff88]x1[/color][/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="CriticalLabel2" type="Label" parent="UI"]
-offset_left = -517.0
-offset_top = 72.0
-offset_right = -338.0
-offset_bottom = 127.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+[node name="Critical" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -662.0
+offset_top = 305.0
+offset_right = -462.0
+offset_bottom = 355.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 40
-text = "Critical: 1%"
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Critical: [color=#ffffff88]1%[/color][/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="GameManager" type="Node2D" parent="."]
 script = ExtResource("5_xkm8x")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_y68mb")
+autoplay = true
