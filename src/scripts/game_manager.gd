@@ -3,6 +3,14 @@ extends Node2D
 @onready var player: Node2D = $"../Player"
 @onready var dice: Node2D = $"../UI/Dice"
 @onready var dice_sound: AudioStreamPlayer2D = $"../DiceSound"
+@onready var charge_sound: AudioStreamPlayer2D = $"../ChargeSound"
+#Animaciones
+@onready var anim_r: AnimationPlayer = $"../UI/Result/animR"
+@onready var anim_p: AnimationPlayer = $"../UI/Points/animP"
+@onready var anim_h: AnimationPlayer = $"../UI/Health/animH"
+@onready var anim_a: AnimationPlayer = $"../UI/Attack/animA"
+@onready var anim_s: AnimationPlayer = $"../UI/Speed/animS"
+@onready var anim_c: AnimationPlayer = $"../UI/Critical/animC"
 
 
 const MATX = 7
@@ -208,9 +216,22 @@ func fight() -> void:
 			dice.become5()
 		6:
 			dice.become6()
-			
-	await get_tree().create_timer(0.4).timeout	
+	
+	anim_r.play("shake_and_scale")
+	charge_sound.play(0.18)
+	await get_tree().create_timer(0.5).timeout	
+	anim_a.play("shake_and_scale")
+	charge_sound.play(0.18)
+	await get_tree().create_timer(0.5).timeout	
+	anim_s.play("shake_and_scale")
+	charge_sound.play(0.18)
+	await get_tree().create_timer(0.5).timeout	
+	anim_p.play("shake_and_scale")
+	charge_sound.play(0.18)
+	await get_tree().create_timer(0.5).timeout	
+	await get_tree().create_timer(0.3).timeout	
 	var result = (num + player.getAttack()) * player.getSpeed()
+	
 	if(result >= Global.enemyValue):
 		player.setAttack(Global.enemyReward)
 	else:

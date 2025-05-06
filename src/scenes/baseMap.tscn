@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://v0uc2yko34gl"]
+[gd_scene load_steps=16 format=3 uid="uid://v0uc2yko34gl"]
 
 [ext_resource type="Script" uid="uid://bdg4iibow25if" path="res://src/scripts/hexagonal_tiles.gd" id="2_ihm57"]
 [ext_resource type="Shader" uid="uid://b4yhybxijnkyx" path="res://src/shaders/baseMap.gdshader" id="3_q1pjq"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cupl85mc5wwnk" path="res://src/scenes/dice.tscn" id="6_7ohmq"]
 [ext_resource type="AudioStream" uid="uid://1jmyr2wxnjp0" path="res://src/sounds/Ulrich-Schnauss-Nothing-Happens-in-June.wav" id="6_y68mb"]
 [ext_resource type="AudioStream" uid="uid://uoseppn01dip" path="res://src/sounds/Dice-Rolling-Sound-Effect.wav" id="8_l5y5f"]
+[ext_resource type="AudioStream" uid="uid://bqol8ohepxt0p" path="res://src/sounds/Video-Game-Charge-Up-Sound-Sound-Effect-_HQ_.wav" id="10_0is84"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hn2dp"]
 shader = ExtResource("3_q1pjq")
@@ -26,6 +27,67 @@ shader_parameter/colour_3 = Color(0, 0, 0, 1)
 shader_parameter/contrast = 2.0
 shader_parameter/spin_amount = 0.36
 shader_parameter/pixel_filter = 700.0
+
+[sub_resource type="Animation" id="Animation_fguah"]
+resource_name = "shake_and_scale"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.500988),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.36, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.226893, -0.226893, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_0is84"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3cycs"]
+_data = {
+&"RESET": SubResource("Animation_0is84"),
+&"shake_and_scale": SubResource("Animation_fguah")
+}
 
 [node name="Node2D" type="Node2D"]
 
@@ -165,16 +227,41 @@ script = ExtResource("5_fguah")
 
 [node name="Result" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -599.0
-offset_top = -200.0
-offset_right = -330.0
-offset_bottom = -110.0
+offset_left = -571.0
+offset_top = -145.0
+offset_right = -371.0
+offset_bottom = -64.0
+pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("5_gs3hw")
 theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
-text = "[wave amp=20.0 freq=8.0 connected=1]: [color=#ffffff88]12.4[/color][/wave]"
+text = "[wave amp=20.0 freq=8.0 connected=1]: [color=#ffffff88]12.4[/color][/wave]
+"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="animR" type="AnimationPlayer" parent="UI/Result"]
+libraries = {
+&"": SubResource("AnimationLibrary_3cycs")
+}
+
+[node name="PointsT" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -834.0
+offset_top = 294.0
+offset_right = -380.0
+offset_bottom = 384.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Total: [/wave]"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -184,17 +271,41 @@ vertical_alignment = 1
 
 [node name="Points" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -719.0
-offset_top = -60.0
-offset_right = -265.0
-offset_bottom = 30.0
+offset_left = -479.0
+offset_top = 301.0
+offset_right = -279.0
+offset_bottom = 371.0
+pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("5_gs3hw")
 theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
-text = "[wave amp=20.0 freq=8.0 connected=1]Points: [color=#ffffff88]89756[/color][/wave]"
-fit_content = true
+text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]89756[/color][/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="animP" type="AnimationPlayer" parent="UI/Points"]
+libraries = {
+&"": SubResource("AnimationLibrary_3cycs")
+}
+
+[node name="HealthT" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -741.0
+offset_top = 6.0
+offset_right = -489.0
+offset_bottom = 56.0
+pivot_offset = Vector2(126, 25)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Health: [/wave]"
 scroll_active = false
 autowrap_mode = 0
 tab_size = 20
@@ -203,16 +314,40 @@ vertical_alignment = 1
 
 [node name="Health" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -667.0
-offset_top = 65.0
-offset_right = -415.0
-offset_bottom = 115.0
+offset_left = -593.0
+offset_top = 5.0
+offset_right = -393.0
+offset_bottom = 55.0
+pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("5_gs3hw")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[wave amp=20.0 freq=8.0 connected=1]Health: [color=#ffffff88]6.0 0[/color][/wave]"
+text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]6.0 0[/color][/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="animH" type="AnimationPlayer" parent="UI/Health"]
+libraries = {
+&"": SubResource("AnimationLibrary_3cycs")
+}
+
+[node name="AttackT" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -740.0
+offset_top = 79.0
+offset_right = -480.0
+offset_bottom = 129.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Attack: [/wave]"
 scroll_active = false
 autowrap_mode = 0
 tab_size = 20
@@ -221,16 +356,40 @@ vertical_alignment = 1
 
 [node name="Attack" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -677.0
-offset_top = 138.0
-offset_right = -417.0
-offset_bottom = 188.0
+offset_left = -605.0
+offset_top = 77.0
+offset_right = -405.0
+offset_bottom = 127.0
+pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("5_gs3hw")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[wave amp=20.0 freq=8.0 connected=1]Attack: [color=#ffffff88]1.0 0[/color][/wave]"
+text = "[wave amp=20.0 freq=8.0 connected=1] [color=#ffffff88]1.0 0[/color][/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="animA" type="AnimationPlayer" parent="UI/Attack"]
+libraries = {
+&"": SubResource("AnimationLibrary_3cycs")
+}
+
+[node name="SpeedT" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -747.0
+offset_top = 153.0
+offset_right = -494.0
+offset_bottom = 203.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Speed: [/wave]"
 scroll_active = false
 autowrap_mode = 0
 tab_size = 20
@@ -239,16 +398,40 @@ vertical_alignment = 1
 
 [node name="Speed" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -676.0
-offset_top = 212.0
-offset_right = -423.0
-offset_bottom = 262.0
+offset_left = -613.0
+offset_top = 151.0
+offset_right = -413.0
+offset_bottom = 201.0
+pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("5_gs3hw")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[wave amp=20.0 freq=8.0 connected=1]Speed: [color=#ffffff88]x1.0 0[/color][/wave]"
+text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]x1.0 0[/color][/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="animS" type="AnimationPlayer" parent="UI/Speed"]
+libraries = {
+&"": SubResource("AnimationLibrary_3cycs")
+}
+
+[node name="CriticalT" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -751.0
+offset_top = 220.0
+offset_right = -471.0
+offset_bottom = 270.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Critical: [/wave]"
 scroll_active = false
 autowrap_mode = 0
 tab_size = 20
@@ -257,24 +440,30 @@ vertical_alignment = 1
 
 [node name="Critical" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -671.0
-offset_top = 279.0
-offset_right = -391.0
-offset_bottom = 329.0
+offset_left = -582.0
+offset_top = 219.0
+offset_right = -382.0
+offset_bottom = 269.0
+pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("5_gs3hw")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[wave amp=20.0 freq=8.0 connected=1]Critical: [color=#ffffff88]0 .0 1[/color][/wave]"
+text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]0 .0 1[/color][/wave]"
 scroll_active = false
 autowrap_mode = 0
 tab_size = 20
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="animC" type="AnimationPlayer" parent="UI/Critical"]
+libraries = {
+&"": SubResource("AnimationLibrary_3cycs")
+}
+
 [node name="Dice" parent="UI" instance=ExtResource("6_7ohmq")]
-position = Vector2(-658, -166)
+position = Vector2(-645, -108)
 
 [node name="GameManager" type="Node2D" parent="."]
 script = ExtResource("5_xkm8x")
@@ -282,6 +471,9 @@ script = ExtResource("5_xkm8x")
 [node name="DiceSound" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-829, -303)
 stream = ExtResource("8_l5y5f")
+
+[node name="ChargeSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_0is84")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_y68mb")
