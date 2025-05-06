@@ -4,6 +4,8 @@ extends Node2D
 @onready var dice: Node2D = $"../UI/Dice"
 @onready var dice_sound: AudioStreamPlayer2D = $"../DiceSound"
 @onready var charge_sound: AudioStreamPlayer2D = $"../ChargeSound"
+@onready var points: RichTextLabel = $"../UI/Points"
+
 #Animaciones
 @onready var anim_r: AnimationPlayer = $"../UI/Result/animR"
 @onready var anim_p: AnimationPlayer = $"../UI/Points/animP"
@@ -137,7 +139,7 @@ func get_challenge(x:int, y:int) -> float:
 	#nivel * ((x+1)*0.2) * ((y+1)*0.2) * aleatorio
 	return 1
 	
-func get_reward() -> float:
+func get_reward(evento: String) -> float:
 	return 0.2
 	
 func generate_array(x: int, y: int, v: int) -> Dictionary:
@@ -150,7 +152,7 @@ func generate_array(x: int, y: int, v: int) -> Dictionary:
 	else:
 		evento = get_weighted_random()
 	var cantidad = get_challenge(x,y)
-	var reward = get_reward()
+	var reward = get_reward(evento)
 	#Inicia la Tile
 	if nodo and nodo.has_method("setValues"):
 		nodo.setValues(y,x,evento,cantidad,reward)
@@ -198,6 +200,7 @@ func _process(delta: float) -> void:
 		
 func fight() -> void:
 	var num = randi_range(1,6)
+	points.setNumCero()
 	dice.roll()
 	dice_sound.play(0.5)
 	await get_tree().create_timer(0.5).timeout
@@ -218,12 +221,16 @@ func fight() -> void:
 			dice.become6()
 	
 	anim_r.play("shake_and_scale")
+	points.setDice(num)
+	points.setNum(num)
 	charge_sound.play(0.18)
 	await get_tree().create_timer(0.5).timeout	
 	anim_a.play("shake_and_scale")
+	points.setNum(player.getAttack())
 	charge_sound.play(0.18)
 	await get_tree().create_timer(0.5).timeout	
 	anim_s.play("shake_and_scale")
+	points.multNum(player.getSpeed())
 	charge_sound.play(0.18)
 	await get_tree().create_timer(0.5).timeout	
 	anim_p.play("shake_and_scale")
@@ -233,7 +240,19 @@ func fight() -> void:
 	var result = (num + player.getAttack()) * player.getSpeed()
 	
 	if(result >= Global.enemyValue):
-		player.setAttack(Global.enemyReward)
+		match tileMap[Global.posPressed.x][Global.posPressed.y]["type"]:
+			"Attack":
+				player.setAttack(Global.enemyReward)
+			"Speed":
+				player.setSpeed(Global.enemyReward)
+			"Critical":
+				player.setCritical(Global.enemyReward)
+			"HealthA":
+				player.setHealth(Global.enemyReward)
+			"HealthS":
+				player.setHealth(Global.enemyReward)
+			"HealthC":
+				player.setHealth(Global.enemyReward)
 	else:
 		player.setHealth(-1)
 	#Movimiento

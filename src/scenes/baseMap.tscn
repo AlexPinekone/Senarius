@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://v0uc2yko34gl"]
+[gd_scene load_steps=17 format=3 uid="uid://v0uc2yko34gl"]
 
 [ext_resource type="Script" uid="uid://bdg4iibow25if" path="res://src/scripts/hexagonal_tiles.gd" id="2_ihm57"]
 [ext_resource type="Shader" uid="uid://b4yhybxijnkyx" path="res://src/shaders/baseMap.gdshader" id="3_q1pjq"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cf0y6du8k1ul6" path="res://src/scripts/game_manager.gd" id="5_xkm8x"]
 [ext_resource type="PackedScene" uid="uid://cupl85mc5wwnk" path="res://src/scenes/dice.tscn" id="6_7ohmq"]
 [ext_resource type="AudioStream" uid="uid://1jmyr2wxnjp0" path="res://src/sounds/Ulrich-Schnauss-Nothing-Happens-in-June.wav" id="6_y68mb"]
+[ext_resource type="Script" uid="uid://dewpkj6dratsv" path="res://src/scripts/pointsText.gd" id="7_3cycs"]
 [ext_resource type="AudioStream" uid="uid://uoseppn01dip" path="res://src/sounds/Dice-Rolling-Sound-Effect.wav" id="8_l5y5f"]
 [ext_resource type="AudioStream" uid="uid://bqol8ohepxt0p" path="res://src/sounds/Video-Game-Charge-Up-Sound-Sound-Effect-_HQ_.wav" id="10_0is84"]
 
@@ -287,6 +288,7 @@ autowrap_mode = 0
 tab_size = 20
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("7_3cycs")
 
 [node name="animP" type="AnimationPlayer" parent="UI/Points"]
 libraries = {
@@ -474,6 +476,7 @@ stream = ExtResource("8_l5y5f")
 
 [node name="ChargeSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_0is84")
+volume_db = 10.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_y68mb")
