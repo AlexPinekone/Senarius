@@ -6,6 +6,7 @@ var ValueX;
 var ValueY;
 var Type;
 var Amount;
+var Reward;
 
 
 
@@ -17,11 +18,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func setValues(x:int, y:int, tipo: String, cantidad: float) -> void:
+func setValues(x:int, y:int, tipo: String, cantidad: float, reward: float) -> void:
 	ValueX = x
 	ValueY = y
 	Type = tipo
 	Amount = cantidad
+	Reward = reward
 	
 func changeContent(m: int) -> void:
 	if(m == 0):
@@ -54,4 +56,5 @@ func _on_button_pressed() -> void:
 	Global.posPressed = Vector2(ValueX, ValueY)
 	Global.enemyValue = Amount
 	Global.enemyType = Type
+	Global.enemyReward = Reward
 	#audio_movement.play(0.65)

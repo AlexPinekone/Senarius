@@ -165,6 +165,25 @@ script = ExtResource("5_fguah")
 
 [node name="Result" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
+offset_left = -599.0
+offset_top = -200.0
+offset_right = -330.0
+offset_bottom = -110.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]: [color=#ffffff88]12.4[/color][/wave]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Points" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
 offset_left = -719.0
 offset_top = -60.0
 offset_right = -265.0
@@ -182,37 +201,18 @@ tab_size = 20
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Points" type="RichTextLabel" parent="UI"]
-custom_minimum_size = Vector2(200, 50)
-offset_left = -599.0
-offset_top = -200.0
-offset_right = -399.0
-offset_bottom = -110.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("5_gs3hw")
-theme_override_font_sizes/normal_font_size = 50
-bbcode_enabled = true
-text = "[wave amp=20.0 freq=8.0 connected=1]: [color=#ffffff88]12.4[/color][/wave]"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-tab_size = 20
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Health" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
 offset_left = -667.0
 offset_top = 65.0
-offset_right = -467.0
+offset_right = -415.0
 offset_bottom = 115.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("5_gs3hw")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[wave amp=20.0 freq=8.0 connected=1]Health: [color=#ffffff88]6[/color][/wave]"
+text = "[wave amp=20.0 freq=8.0 connected=1]Health: [color=#ffffff88]6.0 0[/color][/wave]"
 scroll_active = false
 autowrap_mode = 0
 tab_size = 20
@@ -221,16 +221,16 @@ vertical_alignment = 1
 
 [node name="Attack" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -666.0
+offset_left = -677.0
 offset_top = 138.0
-offset_right = -466.0
+offset_right = -417.0
 offset_bottom = 188.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("5_gs3hw")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[wave amp=20.0 freq=8.0 connected=1]Attack: [color=#ffffff88]1[/color][/wave]"
+text = "[wave amp=20.0 freq=8.0 connected=1]Attack: [color=#ffffff88]1.0 0[/color][/wave]"
 scroll_active = false
 autowrap_mode = 0
 tab_size = 20
@@ -239,16 +239,16 @@ vertical_alignment = 1
 
 [node name="Speed" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -668.0
-offset_top = 223.0
-offset_right = -468.0
-offset_bottom = 273.0
+offset_left = -676.0
+offset_top = 212.0
+offset_right = -423.0
+offset_bottom = 262.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("5_gs3hw")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[wave amp=20.0 freq=8.0 connected=1]Speed: [color=#ffffff88]x1[/color][/wave]"
+text = "[wave amp=20.0 freq=8.0 connected=1]Speed: [color=#ffffff88]x1.0 0[/color][/wave]"
 scroll_active = false
 autowrap_mode = 0
 tab_size = 20
@@ -258,9 +258,9 @@ vertical_alignment = 1
 [node name="Critical" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
 offset_left = -671.0
-offset_top = 293.0
+offset_top = 279.0
 offset_right = -391.0
-offset_bottom = 343.0
+offset_bottom = 329.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("5_gs3hw")

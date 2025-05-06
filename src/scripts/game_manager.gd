@@ -129,6 +129,9 @@ func get_challenge(x:int, y:int) -> float:
 	#nivel * ((x+1)*0.2) * ((y+1)*0.2) * aleatorio
 	return 1
 	
+func get_reward() -> float:
+	return 0.2
+	
 func generate_array(x: int, y: int, v: int) -> Dictionary:
 	var nombre_nodo = "../HexagonalTiles/T" + str(y) + str(x)
 	var nodo = get_node_or_null(nombre_nodo)
@@ -139,9 +142,10 @@ func generate_array(x: int, y: int, v: int) -> Dictionary:
 	else:
 		evento = get_weighted_random()
 	var cantidad = get_challenge(x,y)
+	var reward = get_reward()
 	#Inicia la Tile
 	if nodo and nodo.has_method("setValues"):
-		nodo.setValues(y,x,evento,cantidad)
+		nodo.setValues(y,x,evento,cantidad,reward)
 	#Inicia el diccionario
 	var cell = {
 			"nodo": nodo,
@@ -208,7 +212,9 @@ func fight() -> void:
 	await get_tree().create_timer(0.4).timeout	
 	var result = (num + player.getAttack()) * player.getSpeed()
 	if(result >= Global.enemyValue):
-		pass
+		player.setAttack(Global.enemyReward)
+	else:
+		player.setHealth(-1)
 	#Movimiento
 	player.position = tileMap[Global.posPressed.x][Global.posPressed.y]["nodo"].position
 	reseteaTablero()
