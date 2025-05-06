@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://v0uc2yko34gl"]
+[gd_scene load_steps=10 format=3 uid="uid://v0uc2yko34gl"]
 
 [ext_resource type="Script" uid="uid://bdg4iibow25if" path="res://src/scripts/hexagonal_tiles.gd" id="2_ihm57"]
 [ext_resource type="Shader" uid="uid://b4yhybxijnkyx" path="res://src/shaders/baseMap.gdshader" id="3_q1pjq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dbmj571b7eoxy" path="res://src/scenes/player.tscn" id="4_xkm8x"]
 [ext_resource type="FontFile" uid="uid://bwtx2jrfpi5wi" path="res://src/fonts/KiriFont.otf" id="5_gs3hw"]
 [ext_resource type="Script" uid="uid://cf0y6du8k1ul6" path="res://src/scripts/game_manager.gd" id="5_xkm8x"]
+[ext_resource type="PackedScene" uid="uid://cupl85mc5wwnk" path="res://src/scenes/dice.tscn" id="6_7ohmq"]
 [ext_resource type="AudioStream" uid="uid://1jmyr2wxnjp0" path="res://src/sounds/Ulrich-Schnauss-Nothing-Happens-in-June.wav" id="6_y68mb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hn2dp"]
@@ -155,9 +156,28 @@ position = Vector2(278, 188)
 position = Vector2(278, 282)
 
 [node name="Player" parent="." instance=ExtResource("4_xkm8x")]
-position = Vector2(-510, -149)
+position = Vector2(-903, -186)
 
 [node name="UI" type="Node2D" parent="."]
+
+[node name="Points" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -719.0
+offset_top = -60.0
+offset_right = -265.0
+offset_bottom = 30.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Points: [color=#ffffff88]89756[/color][/wave]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Health" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
@@ -215,21 +235,24 @@ vertical_alignment = 1
 
 [node name="Critical" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -662.0
-offset_top = 305.0
-offset_right = -462.0
-offset_bottom = 355.0
+offset_left = -671.0
+offset_top = 293.0
+offset_right = -391.0
+offset_bottom = 343.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("5_gs3hw")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[wave amp=20.0 freq=8.0 connected=1]Critical: [color=#ffffff88]1%[/color][/wave]"
+text = "[wave amp=20.0 freq=8.0 connected=1]Critical: [color=#ffffff88]0 .0 1[/color][/wave]"
 scroll_active = false
 autowrap_mode = 0
 tab_size = 20
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Node2D" parent="UI" instance=ExtResource("6_7ohmq")]
+position = Vector2(-658, -166)
 
 [node name="GameManager" type="Node2D" parent="."]
 script = ExtResource("5_xkm8x")

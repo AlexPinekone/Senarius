@@ -24,11 +24,9 @@ func changeColor(x: int, y: int, color: int) -> void:
 		sprite.modulate = Color(1,1,1,1)
 
 func changeText(x: int, y: int, m: int) -> void:
-	var amount = tileMap[x][y]["amount"]
-	var type = tileMap[x][y]["type"]
 	var nodo = tileMap[x][y]["nodo"]
 	if nodo and nodo.has_method("changeContent"):
-		nodo.changeContent(amount, type, m)
+		nodo.changeContent(m)
 		
 func enableHexagon(x: int, y:int) -> void:
 	var nodo = tileMap[x][y]["nodo"].get_node("Button")
@@ -111,12 +109,35 @@ func reseteaTablero() -> void:
 				disableHexagon(a,b)
 				changeText(a,b,0)
 			
-
+func get_weighted_random() -> String:
+	var rand = randf()
+	var total = 0.0
+	for i in Global.types.size():
+		total += Global.weights[i]
+		if rand < total:
+			return Global.types[i]
+	return Global.types[-1]  # fallback (por si hay redondeo)
+	
+func get_challenge(x:int, y:int) -> float:
+	#para el boss
+	#if(x != 6 && x !=4):
+	#nivel * ((x+1)*0.2) * ((y+1)*0.2) * aleatorio
+	return 1
+	
 func generate_array(x: int, y: int, v: int) -> Dictionary:
 	var nombre_nodo = "../HexagonalTiles/T" + str(y) + str(x)
 	var nodo = get_node_or_null(nombre_nodo)
+	#Para el Boss
+	var evento
+	if(y == 6 && x ==4):
+		evento = "Boss"
+	else:
+		evento = get_weighted_random()
+	var cantidad = get_challenge(x,y)
+	#Inicia la Tile
 	if nodo and nodo.has_method("setValues"):
-		nodo.setValues(y,x)
+		nodo.setValues(y,x,evento,cantidad)
+	#Inicia el diccionario
 	var cell = {
 			"nodo": nodo,
 			"top": Vector2(y,x-1),
@@ -125,8 +146,8 @@ func generate_array(x: int, y: int, v: int) -> Dictionary:
 			"bottomRight": Vector2(y+1,x+1+v),
 			"topLeft": Vector2(y-1,x+v),
 			"bottomLeft": Vector2(y-1,x+1+v),
-			"type": "ATTACK",
-			"amount": "+1"
+			"type": evento,
+			"amount": cantidad
 		}
 		
 	if (y == 0):

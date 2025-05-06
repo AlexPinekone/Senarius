@@ -4,6 +4,8 @@ extends Node2D
 @onready var audio_movement: AudioStreamPlayer2D = $AudioMovement
 var ValueX;
 var ValueY;
+var Type;
+var Amount;
 
 
 
@@ -15,17 +17,37 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func setValues(x:int, y:int) -> void:
+func setValues(x:int, y:int, tipo: String, cantidad: float) -> void:
 	ValueX = x
 	ValueY = y
+	Type = tipo
+	Amount = cantidad
 	
-func changeContent(content: String, type: String, m: int) -> void:
+func changeContent(m: int) -> void:
 	if(m == 0):
 		label.text = ""
 		label.add_theme_color_override("font_color", Color.WHITE)
 	else:
-		label.text = content
-		label.add_theme_color_override("font_color", Color.RED)
+		match Type:
+			"Attack":
+				label.add_theme_color_override("font_color", Color.RED)
+			"Speed":
+				label.add_theme_color_override("font_color", Color.BLUE)
+			"Critical":
+				label.add_theme_color_override("font_color", Color.ORANGE)
+			"HealthA":
+				label.add_theme_color_override("font_color", Color.GREEN)
+			"HealthS":
+				label.add_theme_color_override("font_color", Color.RED)
+			"HealthC":
+				label.add_theme_color_override("font_color", Color.GREEN)
+			"Used":
+				label.add_theme_color_override("font_color", Color.GRAY)
+			"Boss":
+				label.add_theme_color_override("font_color", Color.PURPLE)
+			_:
+				label.add_theme_color_override("font_color", Color.GRAY)
+		label.text = str(Amount)
 
 func _on_button_pressed() -> void:
 	Global.pressed = true;

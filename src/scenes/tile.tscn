@@ -65,10 +65,10 @@ position = Vector2(55, 48)
 sprite_frames = SubResource("SpriteFrames_3cgyk")
 
 [node name="Label" type="Label" parent="Button/SubViewportContainer/SubViewport"]
-offset_left = 35.0
-offset_top = 20.93
-offset_right = 75.0
-offset_bottom = 75.93
+offset_left = 25.0
+offset_top = 21.0
+offset_right = 62.0
+offset_bottom = 76.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
