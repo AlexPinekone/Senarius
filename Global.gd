@@ -2,6 +2,11 @@ extends Node
 
 var pressed : bool = false;
 var posPressed = Vector2(-1,-1);
+var enemyValue = 0
+var enemyReward = 0
+var enemyType = ""
+
+var combatDone : bool = true;
 
 var types = [
 	"Attack",

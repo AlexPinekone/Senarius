@@ -31,3 +31,6 @@ func become6() -> void:
 	
 func roll() -> void:
 	animation.play("roll")
+	
+func rollstop() -> void:
+	animation.stop()

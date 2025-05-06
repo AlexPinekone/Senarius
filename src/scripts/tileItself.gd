@@ -52,4 +52,6 @@ func changeContent(m: int) -> void:
 func _on_button_pressed() -> void:
 	Global.pressed = true;
 	Global.posPressed = Vector2(ValueX, ValueY)
-	audio_movement.play(0.65)
+	Global.enemyValue = Amount
+	Global.enemyType = Type
+	#audio_movement.play(0.65)

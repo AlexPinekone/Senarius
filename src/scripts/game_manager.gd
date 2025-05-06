@@ -1,6 +1,10 @@
 extends Node2D
 
 @onready var player: Node2D = $"../Player"
+@onready var dice: Node2D = $"../UI/Dice"
+@onready var dice_sound: AudioStreamPlayer2D = $"../DiceSound"
+
+
 const MATX = 7
 const MATY = 6
 var tileMap = []
@@ -8,6 +12,7 @@ var tileMap = []
 #Al inicio
 func _ready() -> void:
 	print("Juego iniciado")
+	randomize()
 	start_matrix()
 	reseteaTablero()
 	startPlayer()
@@ -172,9 +177,39 @@ func generate_array(x: int, y: int, v: int) -> Dictionary:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if(Global.pressed):
+	if(Global.pressed && Global.combatDone):
 		Global.pressed = false
-		player.position = tileMap[Global.posPressed.x][Global.posPressed.y]["nodo"].position
-		reseteaTablero()
-		activeHexagons(Global.posPressed.x, Global.posPressed.y)
+		Global.combatDone = false
+		#Espera a que se hagan los cálculos
+		fight()
+		Global.combatDone = true
 		
+func fight() -> void:
+	var num = randi_range(1,6)
+	dice.roll()
+	dice_sound.play(0.5)
+	await get_tree().create_timer(0.5).timeout
+	dice_sound.stop()
+	dice.rollstop()
+	match num:
+		1:
+			dice.become1()
+		2: 
+			dice.become2()
+		3:
+			dice.become3()
+		4:
+			dice.become4()
+		5:
+			dice.become5()
+		6:
+			dice.become6()
+			
+	await get_tree().create_timer(0.4).timeout	
+	var result = (num + player.getAttack()) * player.getSpeed()
+	if(result >= Global.enemyValue):
+		pass
+	#Movimiento
+	player.position = tileMap[Global.posPressed.x][Global.posPressed.y]["nodo"].position
+	reseteaTablero()
+	activeHexagons(Global.posPressed.x, Global.posPressed.y)
