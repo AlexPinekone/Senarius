@@ -18,6 +18,7 @@ extends Node2D
 const MATX = 7
 const MATY = 6
 var tileMap = []
+var visited_tiles: Array = []
 
 #Al inicio
 func _ready() -> void:
@@ -37,6 +38,8 @@ func changeColor(x: int, y: int, color: int) -> void:
 		sprite.modulate = Color(0.7,0.7,0.7,1)
 	if (color == 2):
 		sprite.modulate = Color(1,1,1,1)
+	if (color == 3):
+		sprite.modulate = Color(0,0,1,1)
 
 func changeText(x: int, y: int, m: int) -> void:
 	var nodo = tileMap[x][y]["nodo"]
@@ -123,6 +126,8 @@ func reseteaTablero() -> void:
 				changeColor(a,b,2)
 				disableHexagon(a,b)
 				changeText(a,b,0)
+				if visited_tiles.has(Vector2i(a, b)):
+						changeColor(a,b,3)
 			
 func get_weighted_random() -> String:
 	var rand = randf()
@@ -194,9 +199,21 @@ func _process(delta: float) -> void:
 	if(Global.pressed && Global.combatDone):
 		Global.pressed = false
 		Global.combatDone = false
+		# Guarda la casilla actual antes de mover al jugador
+		var prev_tile = Global.posJugador  
+		player.position = tileMap[Global.posPressed.x][Global.posPressed.y]["nodo"].position
+		
+		var prev_tile_vec = Vector2i(prev_tile.x, prev_tile.y)
+		if not visited_tiles.has(prev_tile_vec):
+			visited_tiles.append(prev_tile_vec)
 		#Espera a que se hagan los cálculos
 		fight()
 		Global.combatDone = true
+		Global.posJugador = Global.posPressed
+		
+		reseteaTablero()  
+		# Y activar los hexágonos alrededor de la nueva posición
+		activeHexagons(Global.posPressed.x, Global.posPressed.y)
 		
 func fight() -> void:
 	var num = randi_range(1,6)

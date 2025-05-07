@@ -5,6 +5,7 @@ var posPressed = Vector2(-1,-1);
 var enemyValue = 0
 var enemyReward = 0
 var enemyType = ""
+var posJugador = Vector2()
 
 var combatDone : bool = true;
 
