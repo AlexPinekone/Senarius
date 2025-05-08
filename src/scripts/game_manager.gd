@@ -29,7 +29,6 @@ func _ready() -> void:
 	start_matrix()
 	reseteaTablero()
 	startPlayer()
-	BackMusic.play()
 	
 func startPlayer() -> void:
 	player.position = tileMap[0][0]["nodo"].position
