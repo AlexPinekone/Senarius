@@ -8,10 +8,10 @@
 [ext_resource type="FontFile" uid="uid://bwtx2jrfpi5wi" path="res://src/fonts/KiriFont.otf" id="5_gs3hw"]
 [ext_resource type="Script" uid="uid://cf0y6du8k1ul6" path="res://src/scripts/game_manager.gd" id="5_xkm8x"]
 [ext_resource type="PackedScene" uid="uid://cupl85mc5wwnk" path="res://src/scenes/dice.tscn" id="6_7ohmq"]
-[ext_resource type="AudioStream" uid="uid://1jmyr2wxnjp0" path="res://src/sounds/Ulrich-Schnauss-Nothing-Happens-in-June.wav" id="6_y68mb"]
 [ext_resource type="Script" uid="uid://dewpkj6dratsv" path="res://src/scripts/pointsText.gd" id="7_3cycs"]
 [ext_resource type="AudioStream" uid="uid://uoseppn01dip" path="res://src/sounds/Dice-Rolling-Sound-Effect.wav" id="8_l5y5f"]
 [ext_resource type="AudioStream" uid="uid://bqol8ohepxt0p" path="res://src/sounds/Video-Game-Charge-Up-Sound-Sound-Effect-_HQ_.wav" id="10_0is84"]
+[ext_resource type="AudioStream" uid="uid://dp8irtook3c7g" path="res://src/sounds/ROBLOX Oof Sound Effect.wav" id="13_u3dtf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hn2dp"]
 shader = ExtResource("3_q1pjq")
@@ -238,7 +238,7 @@ theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("5_gs3hw")
 theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
-text = "[wave amp=20.0 freq=8.0 connected=1]: [color=#ffffff88]12.4[/color][/wave]
+text = "[wave amp=20.0 freq=8.0 connected=1]: [color=#ffffff88]1[/color][/wave]
 "
 scroll_active = false
 autowrap_mode = 0
@@ -478,6 +478,5 @@ stream = ExtResource("8_l5y5f")
 stream = ExtResource("10_0is84")
 volume_db = 10.0
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_y68mb")
-autoplay = true
+[node name="Oof" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_u3dtf")

@@ -8,7 +8,7 @@ extends Node2D
 var Health = 6
 var Attack = 1.0
 var Speed = 1.0
-var Critical = 0.01
+var Critical = 0.05
 var Point = 0
 
 # Called when the node enters the scene tree for the first time.

@@ -49,7 +49,7 @@ func changeContent(m: int) -> void:
 				label.add_theme_color_override("font_color", Color.PURPLE)
 			_:
 				label.add_theme_color_override("font_color", Color.GRAY)
-		label.text = str(Amount)
+		label.text = "%.2f" %Amount
 
 func _on_button_pressed() -> void:
 	Global.pressed = true;

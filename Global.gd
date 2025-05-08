@@ -7,6 +7,17 @@ var enemyReward = 0
 var enemyType = ""
 var posJugador = Vector2()
 
+#Matematicas
+var nivel = 1
+var reto = 4
+
+#Cambio de nivel
+var gHealth = 6
+var gAttack = 1.0
+var gSpeed = 1.0
+var gCritical = 0.05
+var gPoint = 0
+
 var combatDone : bool = true;
 
 var types = [

@@ -4,7 +4,9 @@ extends Node2D
 @onready var dice: Node2D = $"../UI/Dice"
 @onready var dice_sound: AudioStreamPlayer2D = $"../DiceSound"
 @onready var charge_sound: AudioStreamPlayer2D = $"../ChargeSound"
+@onready var oof: AudioStreamPlayer2D = $"../Oof"
 @onready var points: RichTextLabel = $"../UI/Points"
+
 
 #Animaciones
 @onready var anim_r: AnimationPlayer = $"../UI/Result/animR"
@@ -27,9 +29,14 @@ func _ready() -> void:
 	start_matrix()
 	reseteaTablero()
 	startPlayer()
+	BackMusic.play()
 	
 func startPlayer() -> void:
 	player.position = tileMap[0][0]["nodo"].position
+	player.setHealth(Global.gHealth)
+	player.setAttack(Global.gAttack)
+	player.setSpeed(Global.gSpeed)
+	player.setCritical(Global.gCritical)
 	activeHexagons(0,0)
 	
 func changeColor(x: int, y: int, color: int) -> void:
@@ -139,13 +146,17 @@ func get_weighted_random() -> String:
 	return Global.types[-1]  # fallback (por si hay redondeo)
 	
 func get_challenge(x:int, y:int) -> float:
+	var rand = randf() + 1
+	var challenge
 	#para el boss
-	#if(x != 6 && x !=4):
-	#nivel * ((x+1)*0.2) * ((y+1)*0.2) * aleatorio
-	return 1
+	if(x != 6 && x !=4):
+		challenge = Global.nivel * ((x+1)*0.2) * ((y+1)*0.2) * Global.reto * 2 * rand
+	else:
+		challenge = Global.nivel * ((x+1)*0.2) * ((y+1)*0.2) * Global.reto * rand
+	return challenge
 	
 func get_reward(evento: String) -> float:
-	return 0.2
+	return 0.2*Global.nivel
 	
 func generate_array(x: int, y: int, v: int) -> Dictionary:
 	var nombre_nodo = "../HexagonalTiles/T" + str(y) + str(x)
@@ -158,6 +169,9 @@ func generate_array(x: int, y: int, v: int) -> Dictionary:
 		evento = get_weighted_random()
 	var cantidad = get_challenge(x,y)
 	var reward = get_reward(evento)
+	if (evento == "Critical"):
+		reward = reward/4
+		
 	#Inicia la Tile
 	if nodo and nodo.has_method("setValues"):
 		nodo.setValues(y,x,evento,cantidad,reward)
@@ -193,27 +207,23 @@ func generate_array(x: int, y: int, v: int) -> Dictionary:
 		cell["bottomRight"] =  null
 		cell["bottomLeft"] =  null
 	return cell
+	
+func get_random_critical() -> bool:
+	var res = false
+	var rand = randf()
+	var prob_crit = player.getCritical()
+	if rand <= prob_crit:
+		res = true
+	return res
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if(Global.pressed && Global.combatDone):
 		Global.pressed = false
 		Global.combatDone = false
-		# Guarda la casilla actual antes de mover al jugador
-		var prev_tile = Global.posJugador  
-		player.position = tileMap[Global.posPressed.x][Global.posPressed.y]["nodo"].position
 		
-		var prev_tile_vec = Vector2i(prev_tile.x, prev_tile.y)
-		if not visited_tiles.has(prev_tile_vec):
-			visited_tiles.append(prev_tile_vec)
 		#Espera a que se hagan los cálculos
 		fight()
-		Global.combatDone = true
-		Global.posJugador = Global.posPressed
-		
-		reseteaTablero()  
-		# Y activar los hexágonos alrededor de la nueva posición
-		activeHexagons(Global.posPressed.x, Global.posPressed.y)
 		
 func fight() -> void:
 	var num = randi_range(1,6)
@@ -250,12 +260,21 @@ func fight() -> void:
 	points.multNum(player.getSpeed())
 	charge_sound.play(0.18)
 	await get_tree().create_timer(0.5).timeout	
-	anim_p.play("shake_and_scale")
-	charge_sound.play(0.18)
-	await get_tree().create_timer(0.5).timeout	
-	await get_tree().create_timer(0.3).timeout	
-	var result = (num + player.getAttack()) * player.getSpeed()
+	var crit = get_random_critical()
+	if (crit):
+		anim_c.play("shake_and_scale")
+		points.multNum(3)
+		charge_sound.play(0.18)
+		await get_tree().create_timer(0.5).timeout	
 	
+	await get_tree().create_timer(0.5).timeout	
+	
+	var result
+	if (crit):
+		result = (num + player.getAttack()) * player.getSpeed() * 3
+	else:
+		result = (num + player.getAttack()) * player.getSpeed() 
+		
 	if(result >= Global.enemyValue):
 		match tileMap[Global.posPressed.x][Global.posPressed.y]["type"]:
 			"Attack":
@@ -272,7 +291,29 @@ func fight() -> void:
 				player.setHealth(Global.enemyReward)
 	else:
 		player.setHealth(-1)
+		anim_h.play("shake_and_scale")
+		oof.play()
+		await get_tree().create_timer(0.5).timeout	
+		
+	if(tileMap[Global.posPressed.x][Global.posPressed.y]["type"] == "Boss"):
+		Global.nivel = 2
+		Global.reto *=1.6
+		Global.gHealth = player.getHealth()
+		Global.gAttack = player.getAttack()
+		Global.gSpeed = player.getSpeed()
+		Global.gCritical = player.getCritical()
+		get_tree().change_scene_to_file("res://src/scenes/baseMap.tscn")
+		
 	#Movimiento
+	# Guarda la casilla actual antes de mover al jugador
+	var prev_tile = Global.posJugador
 	player.position = tileMap[Global.posPressed.x][Global.posPressed.y]["nodo"].position
+	
+	var prev_tile_vec = Vector2i(prev_tile.x, prev_tile.y)
+	if not visited_tiles.has(prev_tile_vec):
+		visited_tiles.append(prev_tile_vec)
+	
 	reseteaTablero()
 	activeHexagons(Global.posPressed.x, Global.posPressed.y)
+	Global.combatDone = true
+	Global.posJugador = Global.posPressed

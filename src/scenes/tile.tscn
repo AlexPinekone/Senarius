@@ -72,8 +72,8 @@ offset_bottom = 76.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 40
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 32
 
 [node name="AudioMovement" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_masbt")
