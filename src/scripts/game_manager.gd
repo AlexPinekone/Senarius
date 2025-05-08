@@ -64,44 +64,63 @@ func activeHexagons(x: int, y: int) -> void:
 	if(tileMap[x][y]["top"] != null):
 		#var nombre_nodo = "../HexagonalTiles/T" + str(tileMap[x][y]["top"].x) + str(tileMap[x][y]["top"].y)
 		#var nodoT = get_node_or_null(nombre_nodo)
-		changeColor(tileMap[x][y]["top"].x, tileMap[x][y]["top"].y,1)
-		enableHexagon(tileMap[x][y]["top"].x, tileMap[x][y]["top"].y)
-		changeText(tileMap[x][y]["top"].x, tileMap[x][y]["top"].y,1)
+		if Global.visited_tiles.has(Vector2i(tileMap[x][y]["top"].x, tileMap[x][y]["top"].y)):
+			changeColor(tileMap[x][y]["top"].x,tileMap[x][y]["top"].y,3)
+		else:
+			changeColor(tileMap[x][y]["top"].x, tileMap[x][y]["top"].y,1)
+			enableHexagon(tileMap[x][y]["top"].x, tileMap[x][y]["top"].y)
+			changeText(tileMap[x][y]["top"].x, tileMap[x][y]["top"].y,1)
 	#Abajo
 	if(tileMap[x][y]["bottom"] != null):
 		#var nombre_nodo = "../HexagonalTiles/T" + str(tileMap[x][y]["bottom"].x) + str(tileMap[x][y]["bottom"].y)
 		#var nodoB = get_node_or_null(nombre_nodo)
-		changeColor(tileMap[x][y]["bottom"].x, tileMap[x][y]["bottom"].y,1)
-		enableHexagon(tileMap[x][y]["bottom"].x, tileMap[x][y]["bottom"].y)
-		changeText(tileMap[x][y]["bottom"].x, tileMap[x][y]["bottom"].y,1)
+		if Global.visited_tiles.has(Vector2i(tileMap[x][y]["bottom"].x, tileMap[x][y]["bottom"].y)):
+			changeColor(tileMap[x][y]["bottom"].x,tileMap[x][y]["bottom"].y,3)
+		else:
+			changeColor(tileMap[x][y]["bottom"].x, tileMap[x][y]["bottom"].y,1)
+			enableHexagon(tileMap[x][y]["bottom"].x, tileMap[x][y]["bottom"].y)
+			changeText(tileMap[x][y]["bottom"].x, tileMap[x][y]["bottom"].y,1)
 	#ArribaDerecha
 	if(tileMap[x][y]["topRight"] != null):
 		#var nombre_nodo = "../HexagonalTiles/T" + str(tileMap[x][y]["topRight"].x) + str(tileMap[x][y]["topRight"].y)
 		#var nodoTR = get_node_or_null(nombre_nodo)
-		changeColor(tileMap[x][y]["topRight"].x, tileMap[x][y]["topRight"].y,1)
-		enableHexagon(tileMap[x][y]["topRight"].x, tileMap[x][y]["topRight"].y)
-		changeText(tileMap[x][y]["topRight"].x, tileMap[x][y]["topRight"].y,1)
+		if Global.visited_tiles.has(Vector2i(tileMap[x][y]["topRight"].x, tileMap[x][y]["topRight"].y)):
+			changeColor(tileMap[x][y]["topRight"].x,tileMap[x][y]["topRight"].y,3)
+		else:
+			changeColor(tileMap[x][y]["topRight"].x, tileMap[x][y]["topRight"].y,1)
+			enableHexagon(tileMap[x][y]["topRight"].x, tileMap[x][y]["topRight"].y)
+			changeText(tileMap[x][y]["topRight"].x, tileMap[x][y]["topRight"].y,1)
 	#ArribaIzquierda
 	if(tileMap[x][y]["topLeft"] != null):
 		#var nombre_nodo = "../HexagonalTiles/T" + str(tileMap[x][y]["topLeft"].x) + str(tileMap[x][y]["topLeft"].y)
 		#var nodoTL = get_node_or_null(nombre_nodo)
-		changeColor(tileMap[x][y]["topLeft"].x, tileMap[x][y]["topLeft"].y,1)
-		enableHexagon(tileMap[x][y]["topLeft"].x, tileMap[x][y]["topLeft"].y)
-		changeText(tileMap[x][y]["topLeft"].x, tileMap[x][y]["topLeft"].y,1)
+		if Global.visited_tiles.has(Vector2i(tileMap[x][y]["topLeft"].x, tileMap[x][y]["topLeft"].y)):
+			changeColor(tileMap[x][y]["topLeft"].x,tileMap[x][y]["topLeft"].y,3)
+		else:
+			changeColor(tileMap[x][y]["topLeft"].x, tileMap[x][y]["topLeft"].y,1)
+			enableHexagon(tileMap[x][y]["topLeft"].x, tileMap[x][y]["topLeft"].y)
+			changeText(tileMap[x][y]["topLeft"].x, tileMap[x][y]["topLeft"].y,1)
 	#AbajoDerecha
 	if(tileMap[x][y]["bottomRight"] != null):
 		#var nombre_nodo = "../HexagonalTiles/T" + str(tileMap[x][y]["bottomRight"].x) + str(tileMap[x][y]["bottomRight"].y)
 		#var nodoBR = get_node_or_null(nombre_nodo)
-		changeColor(tileMap[x][y]["bottomRight"].x, tileMap[x][y]["bottomRight"].y,1)
-		enableHexagon(tileMap[x][y]["bottomRight"].x, tileMap[x][y]["bottomRight"].y)
-		changeText(tileMap[x][y]["bottomRight"].x, tileMap[x][y]["bottomRight"].y,1)
+		if Global.visited_tiles.has(Vector2i(tileMap[x][y]["bottomRight"].x, tileMap[x][y]["bottomRight"].y)):
+			changeColor(tileMap[x][y]["bottomRight"].x,tileMap[x][y]["bottomRight"].y,3)
+		else:
+			changeColor(tileMap[x][y]["bottomRight"].x, tileMap[x][y]["bottomRight"].y,1)
+			enableHexagon(tileMap[x][y]["bottomRight"].x, tileMap[x][y]["bottomRight"].y)
+			changeText(tileMap[x][y]["bottomRight"].x, tileMap[x][y]["bottomRight"].y,1)
 	#AbajoIzquierda
 	if(tileMap[x][y]["bottomLeft"] != null):
 		#var nombre_nodo = "../HexagonalTiles/T" + str(tileMap[x][y]["bottomLeft"].x) + str(tileMap[x][y]["bottomLeft"].y)
 		#var nodoBL = get_node_or_null(nombre_nodo)
-		changeColor(tileMap[x][y]["bottomLeft"].x, tileMap[x][y]["bottomLeft"].y,1)
-		enableHexagon(tileMap[x][y]["bottomLeft"].x, tileMap[x][y]["bottomLeft"].y)
-		changeText(tileMap[x][y]["bottomLeft"].x, tileMap[x][y]["bottomLeft"].y,1)
+		if Global.visited_tiles.has(Vector2i(tileMap[x][y]["bottomLeft"].x, tileMap[x][y]["bottomLeft"].y)):
+			changeColor(tileMap[x][y]["bottomLeft"].x,tileMap[x][y]["bottomLeft"].y,3)
+		else:
+			changeColor(tileMap[x][y]["bottomLeft"].x, tileMap[x][y]["bottomLeft"].y,1)
+			enableHexagon(tileMap[x][y]["bottomLeft"].x, tileMap[x][y]["bottomLeft"].y)
+			changeText(tileMap[x][y]["bottomLeft"].x, tileMap[x][y]["bottomLeft"].y,1)
+	
 
 func start_matrix() -> void:
 	var rowSize: int

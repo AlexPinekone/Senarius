@@ -1,0 +1,482 @@
+[gd_scene load_steps=17 format=3 uid="uid://v0uc2yko34gl"]
+
+[ext_resource type="Script" uid="uid://bdg4iibow25if" path="res://src/scripts/hexagonal_tiles.gd" id="2_ihm57"]
+[ext_resource type="Shader" uid="uid://b4yhybxijnkyx" path="res://src/shaders/baseMap.gdshader" id="3_q1pjq"]
+[ext_resource type="PackedScene" uid="uid://cb6m1sjbf1232" path="res://src/scenes/tile.tscn" id="4_ihm57"]
+[ext_resource type="PackedScene" uid="uid://dbmj571b7eoxy" path="res://src/scenes/player.tscn" id="4_xkm8x"]
+[ext_resource type="Script" uid="uid://vkl4k4igem0v" path="res://src/scripts/playerStats.gd" id="5_fguah"]
+[ext_resource type="FontFile" uid="uid://bwtx2jrfpi5wi" path="res://src/fonts/KiriFont.otf" id="5_gs3hw"]
+[ext_resource type="Script" uid="uid://cf0y6du8k1ul6" path="res://src/scripts/game_manager.gd" id="5_xkm8x"]
+[ext_resource type="PackedScene" uid="uid://cupl85mc5wwnk" path="res://src/scenes/dice.tscn" id="6_7ohmq"]
+[ext_resource type="Script" uid="uid://dewpkj6dratsv" path="res://src/scripts/pointsText.gd" id="7_3cycs"]
+[ext_resource type="AudioStream" uid="uid://uoseppn01dip" path="res://src/sounds/Dice-Rolling-Sound-Effect.wav" id="8_l5y5f"]
+[ext_resource type="AudioStream" uid="uid://bqol8ohepxt0p" path="res://src/sounds/Video-Game-Charge-Up-Sound-Sound-Effect-_HQ_.wav" id="10_0is84"]
+[ext_resource type="AudioStream" uid="uid://dp8irtook3c7g" path="res://src/sounds/ROBLOX Oof Sound Effect.wav" id="13_u3dtf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hn2dp"]
+shader = ExtResource("3_q1pjq")
+shader_parameter/polar_coordinates = false
+shader_parameter/polar_center = Vector2(0.5, 0.5)
+shader_parameter/polar_zoom = 1.0
+shader_parameter/polar_repeat = 1.0
+shader_parameter/spin_rotation = 0.0
+shader_parameter/spin_speed = 4.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/colour_1 = Color(1, 0, 0, 1)
+shader_parameter/colour_2 = Color(0.321569, 0, 0.462745, 1)
+shader_parameter/colour_3 = Color(0, 0, 0, 1)
+shader_parameter/contrast = 2.0
+shader_parameter/spin_amount = 0.36
+shader_parameter/pixel_filter = 700.0
+
+[sub_resource type="Animation" id="Animation_0is84"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_fguah"]
+resource_name = "shake_and_scale"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.500988),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.36, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.226893, -0.226893, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3cycs"]
+_data = {
+&"RESET": SubResource("Animation_0is84"),
+&"shake_and_scale": SubResource("Animation_fguah")
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Fondo" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_hn2dp")
+offset_left = -829.0
+offset_top = -303.0
+offset_right = 556.0
+offset_bottom = 479.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-140, 93)
+zoom = Vector2(0.5, 0.5)
+
+[node name="HexagonalTiles" type="Node2D" parent="."]
+script = ExtResource("2_ihm57")
+
+[node name="T00" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-178, -94)
+
+[node name="T01" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-178, 0)
+
+[node name="T02" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-178, 94)
+
+[node name="T03" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-178, 188)
+
+[node name="T04" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-178, 282)
+
+[node name="T10" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-102, -141)
+
+[node name="T11" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-102, -47)
+
+[node name="T12" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-102, 47)
+
+[node name="T13" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-102, 141)
+
+[node name="T14" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-102, 235)
+
+[node name="T15" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-102, 329)
+
+[node name="T20" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-26, -94)
+
+[node name="T21" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-26, 0)
+
+[node name="T22" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-26, 94)
+
+[node name="T23" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-26, 188)
+
+[node name="T24" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(-26, 282)
+
+[node name="T30" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(50, -141)
+
+[node name="T31" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(50, -47)
+
+[node name="T32" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(50, 47)
+
+[node name="T33" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(50, 141)
+
+[node name="T34" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(50, 235)
+
+[node name="T35" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(50, 329)
+
+[node name="T40" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(126, -94)
+
+[node name="T41" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(126, 0)
+
+[node name="T42" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(126, 94)
+
+[node name="T43" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(126, 188)
+
+[node name="T44" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(126, 282)
+
+[node name="T50" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(202, -141)
+
+[node name="T51" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(202, -47)
+
+[node name="T52" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(202, 47)
+
+[node name="T53" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(202, 141)
+
+[node name="T54" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(202, 235)
+
+[node name="T55" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(202, 329)
+
+[node name="T60" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(278, -94)
+
+[node name="T61" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(278, 0)
+
+[node name="T62" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(278, 94)
+
+[node name="T63" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(278, 188)
+
+[node name="T64" parent="HexagonalTiles" instance=ExtResource("4_ihm57")]
+position = Vector2(278, 282)
+
+[node name="Player" parent="." instance=ExtResource("4_xkm8x")]
+position = Vector2(-903, -186)
+script = ExtResource("5_fguah")
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="Result" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -571.0
+offset_top = -145.0
+offset_right = -371.0
+offset_bottom = -64.0
+pivot_offset = Vector2(126, 25)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]: [color=#ffffff88]1[/color][/wave]
+"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="animR" type="AnimationPlayer" parent="UI/Result"]
+libraries = {
+&"": SubResource("AnimationLibrary_3cycs")
+}
+
+[node name="PointsT" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -834.0
+offset_top = 294.0
+offset_right = -380.0
+offset_bottom = 384.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Total: [/wave]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Points" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -479.0
+offset_top = 301.0
+offset_right = -279.0
+offset_bottom = 371.0
+pivot_offset = Vector2(126, 25)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]89756[/color][/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_3cycs")
+
+[node name="animP" type="AnimationPlayer" parent="UI/Points"]
+libraries = {
+&"": SubResource("AnimationLibrary_3cycs")
+}
+
+[node name="HealthT" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -741.0
+offset_top = 6.0
+offset_right = -489.0
+offset_bottom = 56.0
+pivot_offset = Vector2(126, 25)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Health: [/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -593.0
+offset_top = 5.0
+offset_right = -393.0
+offset_bottom = 55.0
+pivot_offset = Vector2(126, 25)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]6.0 0[/color][/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="animH" type="AnimationPlayer" parent="UI/Health"]
+libraries = {
+&"": SubResource("AnimationLibrary_3cycs")
+}
+
+[node name="AttackT" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -740.0
+offset_top = 79.0
+offset_right = -480.0
+offset_bottom = 129.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Attack: [/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Attack" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -605.0
+offset_top = 77.0
+offset_right = -405.0
+offset_bottom = 127.0
+pivot_offset = Vector2(126, 25)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1] [color=#ffffff88]1.0 0[/color][/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="animA" type="AnimationPlayer" parent="UI/Attack"]
+libraries = {
+&"": SubResource("AnimationLibrary_3cycs")
+}
+
+[node name="SpeedT" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -747.0
+offset_top = 153.0
+offset_right = -494.0
+offset_bottom = 203.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Speed: [/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Speed" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -613.0
+offset_top = 151.0
+offset_right = -413.0
+offset_bottom = 201.0
+pivot_offset = Vector2(126, 25)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]x1.0 0[/color][/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="animS" type="AnimationPlayer" parent="UI/Speed"]
+libraries = {
+&"": SubResource("AnimationLibrary_3cycs")
+}
+
+[node name="CriticalT" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -751.0
+offset_top = 220.0
+offset_right = -471.0
+offset_bottom = 270.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1]Critical: [/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Critical" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = -582.0
+offset_top = 219.0
+offset_right = -382.0
+offset_bottom = 269.0
+pivot_offset = Vector2(126, 25)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("5_gs3hw")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]0 .0 1[/color][/wave]"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="animC" type="AnimationPlayer" parent="UI/Critical"]
+libraries = {
+&"": SubResource("AnimationLibrary_3cycs")
+}
+
+[node name="Dice" parent="UI" instance=ExtResource("6_7ohmq")]
+position = Vector2(-645, -108)
+
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("5_xkm8x")
+
+[node name="DiceSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-829, -303)
+stream = ExtResource("8_l5y5f")
+
+[node name="ChargeSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_0is84")
+volume_db = 10.0
+
+[node name="Oof" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_u3dtf")

@@ -13,11 +13,6 @@ var is_blocked: bool = false
 func _ready() -> void:
 	shader_material = shader_material.duplicate()
 	$SubViewportContainer.material = shader_material
-	
-	# Verifica si esta casilla ya fue visitada
-	var tile_id = str(global_position)
-	if tile_id in Global.visited_tiles:
-		marcar_como_bloqueada()
 
 func _process(delta: float) -> void:
 	pass
@@ -61,7 +56,7 @@ func _on_button_up() -> void:
 	var tile_id = str(global_position)
 	if tile_id not in Global.visited_tiles:
 		Global.visited_tiles.append(tile_id)
-		marcar_como_bloqueada()
+		#marcar_como_bloqueada()
 
 func _on_mouse_entered() -> void:
 	if is_blocked:
@@ -69,7 +64,4 @@ func _on_mouse_entered() -> void:
 
 	audio.play()
 
-func marcar_como_bloqueada():
-	is_blocked = true
-	modulate = Color(0.4, 0.4, 0.4, 1.0)  # gris
-	disabled = true  # opcional, desactiva el botón
+	
