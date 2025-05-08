@@ -7,7 +7,7 @@ var ValueY;
 var Type;
 var Amount;
 var Reward;
-
+var is_blocked: bool = false
 
 
 # Called when the node enters the scene tree for the first time.

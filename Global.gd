@@ -6,7 +6,7 @@ var enemyValue = 0
 var enemyReward = 0
 var enemyType = ""
 var posJugador = Vector2()
-
+var visited_tiles: Array = []
 #Matematicas
 var nivel = 1
 var reto = 4

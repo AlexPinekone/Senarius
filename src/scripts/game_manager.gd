@@ -20,7 +20,6 @@ extends Node2D
 const MATX = 7
 const MATY = 6
 var tileMap = []
-var visited_tiles: Array = []
 
 #Al inicio
 func _ready() -> void:
@@ -132,7 +131,7 @@ func reseteaTablero() -> void:
 				changeColor(a,b,2)
 				disableHexagon(a,b)
 				changeText(a,b,0)
-				if visited_tiles.has(Vector2i(a, b)):
+				if Global.visited_tiles.has(Vector2i(a, b)):
 						changeColor(a,b,3)
 			
 func get_weighted_random() -> String:
@@ -225,94 +224,94 @@ func _process(delta: float) -> void:
 		fight()
 		
 func fight() -> void:
-	var num = randi_range(1,6)
+	var pos = Global.posPressed
+	var tile_node = tileMap[pos.x][pos.y]["nodo"]
+
+	# Verifica si la casilla a la que se quiere mover está bloqueada
+	if tile_node.is_blocked:
+		print("Casilla bloqueada. No se puede mover.")
+		Global.combatDone = true
+		return
+
+	var num = randi_range(1, 6)
 	points.setNumCero()
 	dice.roll()
 	dice_sound.play(0.5)
 	await get_tree().create_timer(0.5).timeout
 	dice_sound.stop()
 	dice.rollstop()
+
 	match num:
-		1:
-			dice.become1()
-		2: 
-			dice.become2()
-		3:
-			dice.become3()
-		4:
-			dice.become4()
-		5:
-			dice.become5()
-		6:
-			dice.become6()
-	
+		1: dice.become1()
+		2: dice.become2()
+		3: dice.become3()
+		4: dice.become4()
+		5: dice.become5()
+		6: dice.become6()
+
 	anim_r.play("shake_and_scale")
 	points.setDice(num)
 	points.setNum(num)
 	charge_sound.play(0.18)
-	await get_tree().create_timer(0.5).timeout	
+	await get_tree().create_timer(0.5).timeout
+
 	anim_a.play("shake_and_scale")
 	points.setNum(player.getAttack())
 	charge_sound.play(0.18)
-	await get_tree().create_timer(0.5).timeout	
+	await get_tree().create_timer(0.5).timeout
+
 	anim_s.play("shake_and_scale")
 	points.multNum(player.getSpeed())
 	charge_sound.play(0.18)
-	await get_tree().create_timer(0.5).timeout	
+	await get_tree().create_timer(0.5).timeout
+
 	var crit = get_random_critical()
-	if (crit):
+	if crit:
 		anim_c.play("shake_and_scale")
 		points.multNum(3)
 		charge_sound.play(0.18)
-		await get_tree().create_timer(0.5).timeout	
-	
-	await get_tree().create_timer(0.5).timeout	
-	
-	var result
-	if (crit):
-		result = (num + player.getAttack()) * player.getSpeed() * 3
-	else:
-		result = (num + player.getAttack()) * player.getSpeed() 
-		
-	if(result >= Global.enemyValue):
-		match tileMap[Global.posPressed.x][Global.posPressed.y]["type"]:
-			"Attack":
-				player.setAttack(Global.enemyReward)
-			"Speed":
-				player.setSpeed(Global.enemyReward)
-			"Critical":
-				player.setCritical(Global.enemyReward)
-			"HealthA":
-				player.setHealth(Global.enemyReward)
-			"HealthS":
-				player.setHealth(Global.enemyReward)
-			"HealthC":
-				player.setHealth(Global.enemyReward)
+		await get_tree().create_timer(0.5).timeout
+
+	await get_tree().create_timer(0.5).timeout
+
+	var result = (num + player.getAttack()) * player.getSpeed()
+	if crit:
+		result *= 3
+
+	if result >= Global.enemyValue:
+		match tileMap[pos.x][pos.y]["type"]:
+			"Attack": player.setAttack(Global.enemyReward)
+			"Speed": player.setSpeed(Global.enemyReward)
+			"Critical": player.setCritical(Global.enemyReward)
+			"HealthA", "HealthS", "HealthC": player.setHealth(Global.enemyReward)
 	else:
 		player.setHealth(-1)
 		anim_h.play("shake_and_scale")
 		oof.play()
-		await get_tree().create_timer(0.5).timeout	
-		
-	if(tileMap[Global.posPressed.x][Global.posPressed.y]["type"] == "Boss"):
+		await get_tree().create_timer(0.5).timeout
+
+	if tileMap[pos.x][pos.y]["type"] == "Boss":
 		Global.nivel = 2
-		Global.reto *=1.6
+		Global.reto *= 1.6
 		Global.gHealth = player.getHealth()
 		Global.gAttack = player.getAttack()
 		Global.gSpeed = player.getSpeed()
 		Global.gCritical = player.getCritical()
 		get_tree().change_scene_to_file("res://src/scenes/baseMap.tscn")
-		
-	#Movimiento
-	# Guarda la casilla actual antes de mover al jugador
+		return  # No continuar tras cambiar escena
+
+	# Movimiento válido: Mover al jugador y marcar casilla como visitada
 	var prev_tile = Global.posJugador
-	player.position = tileMap[Global.posPressed.x][Global.posPressed.y]["nodo"].position
-	
+	player.position = tile_node.position
+
 	var prev_tile_vec = Vector2i(prev_tile.x, prev_tile.y)
-	if not visited_tiles.has(prev_tile_vec):
-		visited_tiles.append(prev_tile_vec)
-	
+	if not Global.visited_tiles.has(prev_tile_vec):
+		Global.visited_tiles.append(prev_tile_vec)
+
+	# Se marca como bloqueada para que no se pueda regresar
+	tile_node.is_blocked = true
+
 	reseteaTablero()
-	activeHexagons(Global.posPressed.x, Global.posPressed.y)
+	activeHexagons(pos.x, pos.y)
 	Global.combatDone = true
-	Global.posJugador = Global.posPressed
+	Global.posJugador = pos
