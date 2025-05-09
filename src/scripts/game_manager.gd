@@ -37,6 +37,13 @@ func startPlayer() -> void:
 	player.setCritical(Global.gCritical)
 	activeHexagons(0,0)
 	
+func changeBlocked() ->void:
+	var tile_node
+	for a in range(tileMap.size()):
+			for b in range(tileMap[a].size()):
+				tile_node = tileMap[a][b]["nodo"]
+				tile_node.is_blocked = false
+
 func changeColor(x: int, y: int, color: int) -> void:
 	var sprite = tileMap[x][y]["nodo"].get_node("Button/SubViewportContainer/SubViewport/AnimatedSprite2D")
 	if (color == 1):
@@ -269,17 +276,20 @@ func fight() -> void:
 		6: dice.become6()
 
 	anim_r.play("shake_and_scale")
+	anim_p.play("shake_and_scale")
 	points.setDice(num)
 	points.setNum(num)
 	charge_sound.play(0.18)
 	await get_tree().create_timer(0.5).timeout
 
 	anim_a.play("shake_and_scale")
+	anim_p.play("shake_and_scale")
 	points.setNum(player.getAttack())
 	charge_sound.play(0.18)
 	await get_tree().create_timer(0.5).timeout
 
 	anim_s.play("shake_and_scale")
+	anim_p.play("shake_and_scale")
 	points.multNum(player.getSpeed())
 	charge_sound.play(0.18)
 	await get_tree().create_timer(0.5).timeout
@@ -287,6 +297,7 @@ func fight() -> void:
 	var crit = get_random_critical()
 	if crit:
 		anim_c.play("shake_and_scale")
+		anim_p.play("shake_and_scale")
 		points.multNum(3)
 		charge_sound.play(0.18)
 		await get_tree().create_timer(0.5).timeout
@@ -316,9 +327,10 @@ func fight() -> void:
 		Global.gAttack = player.getAttack()
 		Global.gSpeed = player.getSpeed()
 		Global.gCritical = player.getCritical()
-		get_tree().change_scene_to_file("res://src/scenes/baseMap.tscn")
 		Global.visited_tiles.clear()
 		reseteaTablero()
+		changeBlocked()
+		get_tree().change_scene_to_file("res://src/scenes/baseMap.tscn")
 		return  # No continuar tras cambiar escena
 
 	# Movimiento válido: Mover al jugador y marcar casilla como visitada

@@ -5,10 +5,10 @@ extends Node2D
 @onready var speed: RichTextLabel = $"../UI/Speed"
 @onready var critical: RichTextLabel = $"../UI/Critical"
 
-var Health = 6
-var Attack = 1.0
-var Speed = 1.0
-var Critical = 0.05
+var Health = 0
+var Attack = 0
+var Speed = 0
+var Critical = 0
 var Point = 0
 
 # Called when the node enters the scene tree for the first time.
