@@ -317,6 +317,8 @@ func fight() -> void:
 		Global.gSpeed = player.getSpeed()
 		Global.gCritical = player.getCritical()
 		get_tree().change_scene_to_file("res://src/scenes/baseMap.tscn")
+		Global.visited_tiles.clear()
+		reseteaTablero()
 		return  # No continuar tras cambiar escena
 
 	# Movimiento válido: Mover al jugador y marcar casilla como visitada
