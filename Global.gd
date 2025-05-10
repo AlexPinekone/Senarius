@@ -18,7 +18,7 @@ var gAttack = 1
 var gSpeed = 1
 var gCritical = 0.05
 var gPoint = 0
-var gSteps = 9
+var gSteps = 8
 var gTempSteps = 0
 
 var combatDone : bool = true;
@@ -41,8 +41,8 @@ var weights = [
 	0.04,   # Health Attack
 	0.04,   # Health Speed
 	0.02,    # Health Critical
-	0.25, 	#Step
-	0.10 	#Blank
+	0.20, 	#Step
+	0.15 	#Blank
 ]
 
 

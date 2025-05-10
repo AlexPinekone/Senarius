@@ -181,7 +181,7 @@ func get_reward(evento: String) -> float:
 		"Speed":
 			return 0.1
 		"Critical":
-			return 0.05
+			return 0.02
 		"Steps":
 			return 2
 		"Blank":
