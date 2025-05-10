@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 func _on_button_start_pressed() -> void:
 	transition_anim_exit.play("SceneExit")
 	await get_tree().create_timer(3).timeout
-	get_tree().change_scene_to_file("res://src/scenes/baseMap.tscn")
+	get_tree().change_scene_to_file("res://src/scenes/loadingScreen.tscn")
 
 
 func _on_button_credits_pressed() -> void:

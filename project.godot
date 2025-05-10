@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Senarius"
-run/main_scene="uid://v0uc2yko34gl"
+run/main_scene="uid://bryx1072v71l3"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

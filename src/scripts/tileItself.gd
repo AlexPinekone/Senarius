@@ -34,9 +34,9 @@ func changeContent(m: int) -> void:
 			"Attack":
 				label.add_theme_color_override("font_color", Color.RED)
 			"Speed":
-				label.add_theme_color_override("font_color", Color8(135,206,235))
+				label.add_theme_color_override("font_color", Color.ROYAL_BLUE)
 			"Critical":
-				label.add_theme_color_override("font_color", Color.ORANGE)
+				label.add_theme_color_override("font_color", Color8(255,69,0))
 			"HealthA":
 				label.add_theme_color_override("font_color", Color.GREEN)
 			"HealthS":

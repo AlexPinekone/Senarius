@@ -251,9 +251,9 @@ text = "EXIT"
 
 [node name="TransitionEnter" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_6wcb6")
-offset_left = -905.0
+offset_left = -911.0
 offset_top = 539.0
-offset_right = 495.0
+offset_right = 489.0
 offset_bottom = 1339.0
 mouse_filter = 2
 color = Color(0.136826, 0.136826, 0.136826, 1)

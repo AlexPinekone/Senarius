@@ -159,9 +159,11 @@ func get_challenge(y:int, x:int) -> int:
 		multLejano = y
 	#para el boss
 	if(x == 6 && y ==4):
-		challenge = (retoB) * 4
+		challenge = (retoB) * Global.nivel
 		if(Global.nivel == 1):
 			challenge = 10
+		if (Global.nivel > 5):
+			challenge = challenge * 3
 	else:
 		challenge = retoB + (multLejano-1)*Global.nivel + rand
 	return challenge
