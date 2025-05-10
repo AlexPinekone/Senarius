@@ -15,7 +15,7 @@ extends Node2D
 @onready var anim_a: AnimationPlayer = $"../UI/Attack/animA"
 @onready var anim_s: AnimationPlayer = $"../UI/Speed/animS"
 @onready var anim_c: AnimationPlayer = $"../UI/Critical/animC"
-
+@onready var anim_st: AnimationPlayer = $"../UI/Steps/animSt"
 
 const MATX = 7
 const MATY = 6
@@ -35,6 +35,10 @@ func startPlayer() -> void:
 	player.setAttack(Global.gAttack)
 	player.setSpeed(Global.gSpeed)
 	player.setCritical(Global.gCritical)
+	if(Global.gTempSteps > Global.gSteps):
+		player.setSteps(Global.gTempSteps)
+	else:
+		player.setSteps(Global.gSteps)
 	activeHexagons(0,0)
 	
 func changeBlocked() ->void:
@@ -161,6 +165,10 @@ func get_reward(evento: String) -> float:
 			return 0.2 * Global.nivel
 		"Critical":
 			return 0.05
+		"Steps":
+			return 2
+		"Blank":
+			return 0
 	return 0.2
 	
 func generate_array(x: int, y: int, v: int) -> Dictionary:
@@ -222,15 +230,14 @@ func get_random_critical() -> bool:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if(Global.pressed && Global.combatDone):
-		print("Esta cambio")
 		Global.pressed = false
 		Global.combatDone = false
 		
 		#Espera a que se hagan los cálculos
-		fight()
+		if (player.getSteps() > 0):
+			fight()
 		
 func fight() -> void:
-	print("Esta peleando")
 	var pos = Global.posPressed
 	var tile_node = tileMap[pos.x][pos.y]["nodo"]
 
@@ -294,7 +301,9 @@ func fight() -> void:
 			"Attack": player.setAttack(Global.enemyReward)
 			"Speed": player.setSpeed(Global.enemyReward)
 			"Critical": player.setCritical(Global.enemyReward)
+			"Steps": player.setSteps(Global.enemyReward)
 			"HealthA", "HealthS", "HealthC": player.setHealth(Global.enemyReward)
+			_: pass
 		if tileMap[pos.x][pos.y]["type"] == "Boss":
 			Global.nivel += + 1
 			Global.reto *= 1.6
@@ -302,6 +311,8 @@ func fight() -> void:
 			Global.gAttack = player.getAttack()
 			Global.gSpeed = player.getSpeed()
 			Global.gCritical = player.getCritical()
+			if (player.getSteps()> Global.gSteps):
+				Global.gTempSteps = player.getSteps()
 			Global.visited_tiles.clear()
 			reseteaTablero()
 			changeBlocked()
@@ -313,6 +324,8 @@ func fight() -> void:
 		# Movimiento válido: Mover al jugador y marcar casilla como visitada
 		var prev_tile = Global.posJugador
 		player.position = tile_node.position
+		anim_st.play("shake_and_scale")
+		player.setSteps(-1)
 
 		var prev_tile_vec = Vector2i(prev_tile.x, prev_tile.y)
 		if not Global.visited_tiles.has(prev_tile_vec):

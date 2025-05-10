@@ -4,12 +4,14 @@ extends Node2D
 @onready var attack: RichTextLabel = $"../UI/Attack"
 @onready var speed: RichTextLabel = $"../UI/Speed"
 @onready var critical: RichTextLabel = $"../UI/Critical"
+@onready var steps: RichTextLabel = $"../UI/Steps"
 
 var Health = 0
 var Attack = 0
 var Speed = 0
 var Critical = 0
 var Point = 0
+var Steps = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,10 +19,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	health.bbcode_text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]" + str(Health) +"[/color][/wave]"
+	health.bbcode_text = "[wave amp=20.0 freq=8.0 connected=1][color=#00ff0088]" + str(Health) +"[/color][/wave]"
 	speed.bbcode_text = "[wave amp=20.0 freq=8.0 connected=1][color=#87CEEB88]" + str(Speed) +"[/color][/wave]"
 	critical.bbcode_text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffa50088]" + str(Critical)+"[/color][/wave]"
 	attack.bbcode_text = "[wave amp=20.0 freq=8.0 connected=1][color=#ff000088]" + str(Attack) +"[/color][/wave]"
+	steps.bbcode_text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffff0088]" + str(Steps) +"[/color][/wave]"
+	if(Steps < Global.gTempSteps):
+		Global.gTempSteps = Steps
 	
 func getHealth() -> int:
 	return Health
@@ -34,6 +39,9 @@ func getSpeed() -> float:
 func getCritical() -> float:
 	return Critical
 	
+func getSteps() -> int:
+	return Steps
+	
 func setHealth(val : int) -> void:
 	Health += val
 	
@@ -46,4 +54,6 @@ func setSpeed(val : float) -> void:
 func setCritical(val : float) -> void:
 	Critical += val
 	
+func setSteps(val : int) -> void:
+	Steps += val
 	

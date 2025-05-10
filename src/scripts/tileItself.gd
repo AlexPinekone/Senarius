@@ -30,6 +30,7 @@ func changeContent(m: int) -> void:
 		label.text = ""
 		label.add_theme_color_override("font_color", Color.WHITE)
 	else:
+		print("Hello ", Type)
 		match Type:
 			"Attack":
 				label.add_theme_color_override("font_color", Color.RED)
@@ -45,6 +46,10 @@ func changeContent(m: int) -> void:
 				label.add_theme_color_override("font_color", Color.GREEN)
 			"Used":
 				label.add_theme_color_override("font_color", Color.GRAY)
+			"Steps":
+				label.add_theme_color_override("font_color", Color.YELLOW)
+			"Blank":
+				label.add_theme_color_override("font_color", Color.BLACK)
 			"Boss":
 				label.add_theme_color_override("font_color", Color.PURPLE)
 			_:
