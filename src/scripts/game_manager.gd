@@ -260,7 +260,7 @@ func _process(delta: float) -> void:
 			get_tree().change_scene_to_file("res://src/scenes/gameover.tscn")
 		
 		#Espera a que se hagan los cálculos
-		if (player.getSteps() > 0):
+		if (player.getSteps() > 0 && player.getHealth() > 0):
 			fight()
 		
 func fight() -> void:
