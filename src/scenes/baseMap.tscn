@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://v0uc2yko34gl"]
+[gd_scene load_steps=34 format=3 uid="uid://v0uc2yko34gl"]
 
 [ext_resource type="PackedScene" uid="uid://dum6a02wasa3a" path="res://src/sprites/manyHx.tscn" id="2_eic6s"]
 [ext_resource type="Script" uid="uid://bdg4iibow25if" path="res://src/scripts/hexagonal_tiles.gd" id="2_ihm57"]
@@ -15,6 +15,8 @@
 [ext_resource type="AudioStream" uid="uid://dp8irtook3c7g" path="res://src/sounds/ROBLOX Oof Sound Effect.wav" id="13_u3dtf"]
 [ext_resource type="PackedScene" uid="uid://felujqfdkoer" path="res://src/scenes/restar_button.tscn" id="13_x7cn1"]
 [ext_resource type="Texture2D" uid="uid://blrqv1ckmg58f" path="res://src/tiles/HUD Menus.png" id="14_x7cn1"]
+[ext_resource type="Shader" uid="uid://ohcp0sf4331j" path="res://src/shaders/disolve_shader_load.gdshader" id="16_bic2n"]
+[ext_resource type="Shader" uid="uid://df05qhb2jqedw" path="res://src/scenes/dissolve_exit.gdshader" id="16_y0rph"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hn2dp"]
 shader = ExtResource("3_q1pjq")
@@ -296,31 +298,41 @@ _data = {
 &"shake_and_scale": SubResource("Animation_fguah")
 }
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y0rph"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g4job"]
+noise = SubResource("FastNoiseLite_y0rph")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4job"]
+shader = ExtResource("16_y0rph")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_g4job")
+shader_parameter/dissolve_value = 1.0
+
 [sub_resource type="Animation" id="Animation_bic2n"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(495, -296)]
+"values": [1.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
+tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Vector2(-905, 539)]
 }
 
 [sub_resource type="Animation" id="Animation_y0rph"]
@@ -329,26 +341,26 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0.1, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-905, -296), Vector2(501, -296)]
+"values": [1.0, 0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0, 0.0333333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Vector2(-911, 539), Vector2(-905, -296)]
 }
 
 [sub_resource type="Animation" id="Animation_eic6s"]
@@ -357,26 +369,26 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(495, -296), Vector2(-895, -296)]
+"values": [0.0, 1.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 3),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Vector2(-903, 539), Vector2(-903, -308)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y0rph"]
@@ -385,6 +397,16 @@ _data = {
 &"SceneEnter": SubResource("Animation_y0rph"),
 &"SceneExit": SubResource("Animation_eic6s")
 }
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bic2n"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y0rph"]
+noise = SubResource("FastNoiseLite_bic2n")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y0rph"]
+shader = ExtResource("16_bic2n")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_y0rph")
+shader_parameter/dissolve_value = 1.0
 
 [node name="Node2D" type="Node2D"]
 
@@ -832,11 +854,12 @@ position = Vector2(-1000, -103)
 scale = Vector2(7, 7)
 
 [node name="TransitionExit" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0)
-offset_left = 495.0
-offset_top = -296.0
-offset_right = 1895.0
-offset_bottom = 504.0
+material = SubResource("ShaderMaterial_g4job")
+offset_left = -905.0
+offset_top = 539.0
+offset_right = 495.0
+offset_bottom = 1339.0
+mouse_filter = 2
 color = Color(0.136826, 0.136826, 0.136826, 1)
 
 [node name="TransitionAnimExit" type="AnimationPlayer" parent="TransitionExit"]
@@ -845,11 +868,12 @@ libraries = {
 }
 
 [node name="TransitionEnter" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0)
-offset_left = 495.0
-offset_top = -296.0
-offset_right = 1895.0
-offset_bottom = 504.0
+material = SubResource("ShaderMaterial_y0rph")
+offset_left = -905.0
+offset_top = 539.0
+offset_right = 495.0
+offset_bottom = 1339.0
+mouse_filter = 2
 color = Color(0.136826, 0.136826, 0.136826, 1)
 
 [node name="TransitionAnimEnter" type="AnimationPlayer" parent="TransitionEnter"]

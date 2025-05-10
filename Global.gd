@@ -14,7 +14,7 @@ var reto = 4
 #Cambio de nivel
 var gHealth = 6
 var gAttack = 1
-var gSpeed = 1
+var gSpeed = 10
 var gCritical = 0.05
 var gPoint = 0
 var gSteps = 9

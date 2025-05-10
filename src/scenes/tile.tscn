@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cb6m1sjbf1232"]
+[gd_scene load_steps=15 format=3 uid="uid://cb6m1sjbf1232"]
 
 [ext_resource type="Script" uid="uid://o801vurq62ic" path="res://src/scripts/tile.gd" id="1_3cgyk"]
 [ext_resource type="Texture2D" uid="uid://canl870weld46" path="res://src/tiles/hex_grid.png" id="1_33s04"]
 [ext_resource type="Shader" uid="uid://di1w5mdv4gsau" path="res://src/shaders/fake_3d.gdshader" id="1_cijmj"]
 [ext_resource type="Script" uid="uid://dq6lv7610aeey" path="res://src/scripts/tileItself.gd" id="1_lvqq3"]
+[ext_resource type="Shader" uid="uid://cms6oig8lmx3k" path="res://src/scenes/disolve_shader.gdshader" id="2_4jn14"]
 [ext_resource type="FontFile" uid="uid://jrdb2urrngxx" path="res://src/fonts/ARCADECLASSIC.TTF" id="5_6br8n"]
 [ext_resource type="AudioStream" uid="uid://ddag0jreql1lf" path="res://src/sounds/key.wav" id="5_h3bi2"]
 [ext_resource type="AudioStream" uid="uid://gmp628x2naxa" path="res://src/sounds/Click-Sound-Effect-_HD_.wav" id="5_masbt"]
@@ -17,7 +18,17 @@ shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4jn14"]
+frequency = 0.0087
+offset = Vector3(-51.28, 25.64, 0)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_egj24"]
+noise = SubResource("FastNoiseLite_4jn14")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3cgyk"]
+shader = ExtResource("2_4jn14")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_egj24")
+shader_parameter/dissolve_value = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cijmj"]
 atlas = ExtResource("1_33s04")

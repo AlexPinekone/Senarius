@@ -5,6 +5,7 @@ var original_y_rot := 0.0
 @export var angle_x_max: float = 35.0
 @export var angle_y_max: float = 35.0
 @onready var shader_material: ShaderMaterial = $SubViewportContainer.material as ShaderMaterial
+@onready var diss: ShaderMaterial = $SubViewportContainer/SubViewport/AnimatedSprite2D.material as ShaderMaterial
 @onready var sprite2d: AnimatedSprite2D = $SubViewportContainer/SubViewport/AnimatedSprite2D
 @onready var audio: AudioStreamPlayer2D = $"../AudioStreamPlayer2D"
 
@@ -13,6 +14,10 @@ var is_blocked: bool = false
 func _ready() -> void:
 	shader_material = shader_material.duplicate()
 	$SubViewportContainer.material = shader_material
+	
+	diss = diss.duplicate()
+	$SubViewportContainer/SubViewport/AnimatedSprite2D.material = diss
+	
 
 func _process(delta: float) -> void:
 	pass
@@ -61,5 +66,27 @@ func _on_mouse_entered() -> void:
 		return
 		
 	audio.play()
-
 	
+	
+func start_dissolve():
+	#await get_tree().create_timer(0.5).timeout
+	var tween = create_tween()
+	tween.tween_property(diss, "shader_parameter/dissolve_value", 0, 2)
+
+func dissolve() -> void:
+	await dissolve_over_time(1.0)
+
+func dissolve_over_time(duration: float) ->void:
+	var time_passed := 0.0
+	var start := 1.0
+	var end := 0.0
+	
+	while time_passed < duration:
+		var t := time_passed / duration
+		var value = lerp(start, end, t)
+		var diss = get_node("SubViewportContainer/SubViewport/AnimatedSprite2D").material as ShaderMaterial
+		diss.set_shader_parameter("dissolve_value", value)
+		
+		await get_tree().create_timer(0.016).timeout  # ~60fps
+		time_passed += 0.016
+		

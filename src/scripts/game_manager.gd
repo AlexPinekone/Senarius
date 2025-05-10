@@ -314,13 +314,16 @@ func fight() -> void:
 			Global.gCritical = player.getCritical()
 			if (player.getSteps()> Global.gSteps):
 				Global.gTempSteps = player.getSteps()
+				
+			transition_anim_exit.play("SceneExit")
+			await get_tree().create_timer(3).timeout
+			
 			Global.visited_tiles.clear()
 			reseteaTablero()
 			changeBlocked()
 			Global.combatDone = true
 			Global.posJugador = Vector2(0,0)
-			transition_anim_exit.play("SceneExit")
-			await get_tree().create_timer(3).timeout
+			
 			get_tree().change_scene_to_file("res://src/scenes/loadingScreen.tscn")
 			return  # No continuar tras cambiar escena
 

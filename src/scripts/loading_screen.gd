@@ -10,6 +10,7 @@ var scene_load_status = 0
 func _ready() -> void:
 	sceneName = "res://src/scenes/baseMap.tscn"
 	tile.get_node("Button").disabled = true
+	tile.get_node("Button").start_dissolve()
 	await get_tree().create_timer(1.5).timeout
 	#tile.get_node("Button").disabled = true
 	ResourceLoader.load_threaded_request(sceneName)
