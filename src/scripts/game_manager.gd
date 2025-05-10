@@ -43,6 +43,7 @@ func changeBlocked() ->void:
 			for b in range(tileMap[a].size()):
 				tile_node = tileMap[a][b]["nodo"]
 				tile_node.is_blocked = false
+				enableHexagon(a,b)
 
 func changeColor(x: int, y: int, color: int) -> void:
 	var sprite = tileMap[x][y]["nodo"].get_node("Button/SubViewportContainer/SubViewport/AnimatedSprite2D")
@@ -243,6 +244,7 @@ func get_random_critical() -> bool:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if(Global.pressed && Global.combatDone):
+		print("Esta cambio")
 		Global.pressed = false
 		Global.combatDone = false
 		
@@ -250,6 +252,7 @@ func _process(delta: float) -> void:
 		fight()
 		
 func fight() -> void:
+	print("Esta peleando")
 	var pos = Global.posPressed
 	var tile_node = tileMap[pos.x][pos.y]["nodo"]
 
@@ -330,6 +333,8 @@ func fight() -> void:
 		Global.visited_tiles.clear()
 		reseteaTablero()
 		changeBlocked()
+		Global.combatDone = true
+		Global.posJugador = Vector2(0,0)
 		get_tree().change_scene_to_file("res://src/scenes/baseMap.tscn")
 		return  # No continuar tras cambiar escena
 

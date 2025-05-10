@@ -43,13 +43,11 @@ func _on_mouse_exited() -> void:
 func _on_button_down() -> void:
 	if is_blocked:
 		return
-
 	sprite2d.scale = Vector2(0.8, 0.8)
 
 func _on_button_up() -> void:
 	if is_blocked:
 		return
-
 	sprite2d.scale = Vector2(1, 1)
 
 	# Agregar esta casilla a la lista global si no ha sido visitada
@@ -61,7 +59,7 @@ func _on_button_up() -> void:
 func _on_mouse_entered() -> void:
 	if is_blocked:
 		return
-
+		
 	audio.play()
 
 	
