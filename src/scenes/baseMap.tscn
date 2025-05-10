@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://v0uc2yko34gl"]
+[gd_scene load_steps=26 format=3 uid="uid://v0uc2yko34gl"]
 
 [ext_resource type="PackedScene" uid="uid://dum6a02wasa3a" path="res://src/sprites/manyHx.tscn" id="2_eic6s"]
 [ext_resource type="Script" uid="uid://bdg4iibow25if" path="res://src/scripts/hexagonal_tiles.gd" id="2_ihm57"]
@@ -294,6 +294,96 @@ tracks/1/keys = {
 _data = {
 &"RESET": SubResource("Animation_0is84"),
 &"shake_and_scale": SubResource("Animation_fguah")
+}
+
+[sub_resource type="Animation" id="Animation_bic2n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(495, -296)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_y0rph"]
+resource_name = "SceneEnter"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-905, -296), Vector2(501, -296)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_eic6s"]
+resource_name = "SceneExit"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(495, -296), Vector2(-895, -296)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0rph"]
+_data = {
+&"RESET": SubResource("Animation_bic2n"),
+&"SceneEnter": SubResource("Animation_y0rph"),
+&"SceneExit": SubResource("Animation_eic6s")
 }
 
 [node name="Node2D" type="Node2D"]
@@ -740,3 +830,30 @@ stream = ExtResource("13_u3dtf")
 [node name="Node2D" parent="." instance=ExtResource("13_x7cn1")]
 position = Vector2(-1000, -103)
 scale = Vector2(7, 7)
+
+[node name="TransitionExit" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 495.0
+offset_top = -296.0
+offset_right = 1895.0
+offset_bottom = 504.0
+color = Color(0.136826, 0.136826, 0.136826, 1)
+
+[node name="TransitionAnimExit" type="AnimationPlayer" parent="TransitionExit"]
+libraries = {
+&"": SubResource("AnimationLibrary_y0rph")
+}
+
+[node name="TransitionEnter" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 495.0
+offset_top = -296.0
+offset_right = 1895.0
+offset_bottom = 504.0
+color = Color(0.136826, 0.136826, 0.136826, 1)
+
+[node name="TransitionAnimEnter" type="AnimationPlayer" parent="TransitionEnter"]
+libraries = {
+&"": SubResource("AnimationLibrary_y0rph")
+}
+autoplay = "SceneEnter"

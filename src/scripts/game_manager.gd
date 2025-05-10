@@ -6,6 +6,7 @@ extends Node2D
 @onready var charge_sound: AudioStreamPlayer2D = $"../ChargeSound"
 @onready var oof: AudioStreamPlayer2D = $"../Oof"
 @onready var points: RichTextLabel = $"../UI/Points"
+@onready var transition_anim_exit: AnimationPlayer = $"../TransitionExit/TransitionAnimExit"
 
 
 #Animaciones
@@ -318,7 +319,9 @@ func fight() -> void:
 			changeBlocked()
 			Global.combatDone = true
 			Global.posJugador = Vector2(0,0)
-			get_tree().change_scene_to_file("res://src/scenes/baseMap.tscn")
+			transition_anim_exit.play("SceneExit")
+			await get_tree().create_timer(3).timeout
+			get_tree().change_scene_to_file("res://src/scenes/loadingScreen.tscn")
 			return  # No continuar tras cambiar escena
 
 		# Movimiento válido: Mover al jugador y marcar casilla como visitada

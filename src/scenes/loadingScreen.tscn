@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcmq1mlkn5eob"]
+
+[ext_resource type="Script" uid="uid://d3fujsatha6bo" path="res://src/scripts/loading_screen.gd" id="1_fibsv"]
+[ext_resource type="PackedScene" uid="uid://cb6m1sjbf1232" path="res://src/scenes/tile.tscn" id="2_j3hct"]
+
+[sub_resource type="Animation" id="Animation_hrqqn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_5102s"]
+resource_name = "loading"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-6.28319, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wg7x4"]
+_data = {
+&"RESET": SubResource("Animation_hrqqn"),
+&"loading": SubResource("Animation_5102s")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_fibsv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Transition" type="ColorRect" parent="."]
+offset_left = -723.0
+offset_top = -383.0
+offset_right = 677.0
+offset_bottom = 417.0
+color = Color(0.136826, 0.136826, 0.136826, 1)
+
+[node name="Tile" parent="." instance=ExtResource("2_j3hct")]
+modulate = Color(1, 1, 1, 0.218085)
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(2, -3)
+rotation = -6.28319
+
+[node name="TileSpin" type="AnimationPlayer" parent="Tile"]
+libraries = {
+&"": SubResource("AnimationLibrary_wg7x4")
+}
+autoplay = "loading"
