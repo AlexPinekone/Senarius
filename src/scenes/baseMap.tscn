@@ -1,5 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://v0uc2yko34gl"]
+[gd_scene load_steps=22 format=3 uid="uid://v0uc2yko34gl"]
 
+[ext_resource type="PackedScene" uid="uid://dum6a02wasa3a" path="res://src/sprites/manyHx.tscn" id="2_eic6s"]
 [ext_resource type="Script" uid="uid://bdg4iibow25if" path="res://src/scripts/hexagonal_tiles.gd" id="2_ihm57"]
 [ext_resource type="Shader" uid="uid://b4yhybxijnkyx" path="res://src/shaders/baseMap.gdshader" id="3_q1pjq"]
 [ext_resource type="PackedScene" uid="uid://cb6m1sjbf1232" path="res://src/scenes/tile.tscn" id="4_ihm57"]
@@ -303,6 +304,9 @@ offset_left = -889.0
 offset_top = -296.0
 offset_right = 496.0
 offset_bottom = 486.0
+
+[node name="Node2D2" parent="." instance=ExtResource("2_eic6s")]
+position = Vector2(0, 3)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_bic2n")

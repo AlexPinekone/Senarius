@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://byha6k6q8l50h"]
+
+[ext_resource type="Texture2D" uid="uid://dsd3je6fqmlef" path="res://src/tiles/hex_grid_dark.png" id="1_dsfsn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsfsn"]
+atlas = ExtResource("1_dsfsn")
+region = Rect2(9, 8, 110, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_134bh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsfsn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_134bh")

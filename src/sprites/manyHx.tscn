@@ -1,0 +1,157 @@
+[gd_scene load_steps=2 format=3 uid="uid://dum6a02wasa3a"]
+
+[ext_resource type="PackedScene" uid="uid://byha6k6q8l50h" path="res://src/tiles/bk_hx.tscn" id="1_rh2i5"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="c00" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-178, -94)
+scale = Vector2(1.4, 1.4)
+
+[node name="c01" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-178, 0)
+scale = Vector2(1.4, 1.4)
+
+[node name="c02" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-178, 94)
+scale = Vector2(1.4, 1.4)
+
+[node name="c03" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-178, 188)
+scale = Vector2(1.4, 1.4)
+
+[node name="c04" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-178, 282)
+scale = Vector2(1.4, 1.4)
+
+[node name="c05" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-102, -141)
+scale = Vector2(1.4, 1.4)
+
+[node name="c06" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-102, -47)
+scale = Vector2(1.4, 1.4)
+
+[node name="c07" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-102, 47)
+scale = Vector2(1.4, 1.4)
+
+[node name="c08" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-102, 141)
+scale = Vector2(1.4, 1.4)
+
+[node name="c09" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-102, 235)
+scale = Vector2(1.4, 1.4)
+
+[node name="c10" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-102, 329)
+scale = Vector2(1.4, 1.4)
+
+[node name="c11" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-26, -94)
+scale = Vector2(1.4, 1.4)
+
+[node name="c12" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-26, 0)
+scale = Vector2(1.4, 1.4)
+
+[node name="c13" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-26, 94)
+scale = Vector2(1.4, 1.4)
+
+[node name="c14" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-26, 188)
+scale = Vector2(1.4, 1.4)
+
+[node name="c15" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(-26, 282)
+scale = Vector2(1.4, 1.4)
+
+[node name="c16" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(50, -141)
+scale = Vector2(1.4, 1.4)
+
+[node name="c17" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(50, -47)
+scale = Vector2(1.4, 1.4)
+
+[node name="c18" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(50, 47)
+scale = Vector2(1.4, 1.4)
+
+[node name="c19" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(50, 141)
+scale = Vector2(1.4, 1.4)
+
+[node name="c20" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(50, 235)
+scale = Vector2(1.4, 1.4)
+
+[node name="c21" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(50, 329)
+scale = Vector2(1.4, 1.4)
+
+[node name="c22" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(126, -94)
+scale = Vector2(1.4, 1.4)
+
+[node name="c23" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(126, 0)
+scale = Vector2(1.4, 1.4)
+
+[node name="c24" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(126, 94)
+scale = Vector2(1.4, 1.4)
+
+[node name="c25" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(126, 188)
+scale = Vector2(1.4, 1.4)
+
+[node name="c26" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(126, 282)
+scale = Vector2(1.4, 1.4)
+
+[node name="c27" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(202, -141)
+scale = Vector2(1.4, 1.4)
+
+[node name="c28" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(202, -47)
+scale = Vector2(1.4, 1.4)
+
+[node name="c29" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(202, 47)
+scale = Vector2(1.4, 1.4)
+
+[node name="c30" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(202, 141)
+scale = Vector2(1.4, 1.4)
+
+[node name="c31" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(202, 235)
+scale = Vector2(1.4, 1.4)
+
+[node name="c32" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(202, 329)
+scale = Vector2(1.4, 1.4)
+
+[node name="c33" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(278, -94)
+scale = Vector2(1.4, 1.4)
+
+[node name="c34" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(278, 0)
+scale = Vector2(1.4, 1.4)
+
+[node name="c35" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(278, 94)
+scale = Vector2(1.4, 1.4)
+
+[node name="c36" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(278, 188)
+scale = Vector2(1.4, 1.4)
+
+[node name="c37" parent="." instance=ExtResource("1_rh2i5")]
+position = Vector2(278, 282)
+scale = Vector2(1.4, 1.4)
