@@ -67,67 +67,34 @@ func disableHexagon(x: int, y:int) -> void:
 	var nodo = tileMap[x][y]["nodo"].get_node("Button")
 	nodo.disabled = true
 	
+func controlTheHexagon(x: int,y: int,nam: String)-> void:
+	if Global.visited_tiles.has(Vector2i(tileMap[x][y][nam].x, tileMap[x][y][nam].y)):
+		changeColor(tileMap[x][y][nam].x,tileMap[x][y][nam].y,3)
+	else:
+		changeColor(tileMap[x][y][nam].x, tileMap[x][y][nam].y,1)
+		enableHexagon(tileMap[x][y][nam].x, tileMap[x][y][nam].y)
+		changeText(tileMap[x][y][nam].x, tileMap[x][y][nam].y,1)
+
 func activeHexagons(x: int, y: int) -> void:
 	#Arriba
 	if(tileMap[x][y]["top"] != null):
-		#var nombre_nodo = "../HexagonalTiles/T" + str(tileMap[x][y]["top"].x) + str(tileMap[x][y]["top"].y)
-		#var nodoT = get_node_or_null(nombre_nodo)
-		if Global.visited_tiles.has(Vector2i(tileMap[x][y]["top"].x, tileMap[x][y]["top"].y)):
-			changeColor(tileMap[x][y]["top"].x,tileMap[x][y]["top"].y,3)
-		else:
-			changeColor(tileMap[x][y]["top"].x, tileMap[x][y]["top"].y,1)
-			enableHexagon(tileMap[x][y]["top"].x, tileMap[x][y]["top"].y)
-			changeText(tileMap[x][y]["top"].x, tileMap[x][y]["top"].y,1)
+		controlTheHexagon(x,y,"top")
 	#Abajo
 	if(tileMap[x][y]["bottom"] != null):
-		#var nombre_nodo = "../HexagonalTiles/T" + str(tileMap[x][y]["bottom"].x) + str(tileMap[x][y]["bottom"].y)
-		#var nodoB = get_node_or_null(nombre_nodo)
-		if Global.visited_tiles.has(Vector2i(tileMap[x][y]["bottom"].x, tileMap[x][y]["bottom"].y)):
-			changeColor(tileMap[x][y]["bottom"].x,tileMap[x][y]["bottom"].y,3)
-		else:
-			changeColor(tileMap[x][y]["bottom"].x, tileMap[x][y]["bottom"].y,1)
-			enableHexagon(tileMap[x][y]["bottom"].x, tileMap[x][y]["bottom"].y)
-			changeText(tileMap[x][y]["bottom"].x, tileMap[x][y]["bottom"].y,1)
+		controlTheHexagon(x,y,"bottom")
 	#ArribaDerecha
 	if(tileMap[x][y]["topRight"] != null):
-		#var nombre_nodo = "../HexagonalTiles/T" + str(tileMap[x][y]["topRight"].x) + str(tileMap[x][y]["topRight"].y)
-		#var nodoTR = get_node_or_null(nombre_nodo)
-		if Global.visited_tiles.has(Vector2i(tileMap[x][y]["topRight"].x, tileMap[x][y]["topRight"].y)):
-			changeColor(tileMap[x][y]["topRight"].x,tileMap[x][y]["topRight"].y,3)
-		else:
-			changeColor(tileMap[x][y]["topRight"].x, tileMap[x][y]["topRight"].y,1)
-			enableHexagon(tileMap[x][y]["topRight"].x, tileMap[x][y]["topRight"].y)
-			changeText(tileMap[x][y]["topRight"].x, tileMap[x][y]["topRight"].y,1)
+		controlTheHexagon(x,y,"topRight")
 	#ArribaIzquierda
 	if(tileMap[x][y]["topLeft"] != null):
-		#var nombre_nodo = "../HexagonalTiles/T" + str(tileMap[x][y]["topLeft"].x) + str(tileMap[x][y]["topLeft"].y)
-		#var nodoTL = get_node_or_null(nombre_nodo)
-		if Global.visited_tiles.has(Vector2i(tileMap[x][y]["topLeft"].x, tileMap[x][y]["topLeft"].y)):
-			changeColor(tileMap[x][y]["topLeft"].x,tileMap[x][y]["topLeft"].y,3)
-		else:
-			changeColor(tileMap[x][y]["topLeft"].x, tileMap[x][y]["topLeft"].y,1)
-			enableHexagon(tileMap[x][y]["topLeft"].x, tileMap[x][y]["topLeft"].y)
-			changeText(tileMap[x][y]["topLeft"].x, tileMap[x][y]["topLeft"].y,1)
+		controlTheHexagon(x,y,"topLeft")
 	#AbajoDerecha
 	if(tileMap[x][y]["bottomRight"] != null):
-		#var nombre_nodo = "../HexagonalTiles/T" + str(tileMap[x][y]["bottomRight"].x) + str(tileMap[x][y]["bottomRight"].y)
-		#var nodoBR = get_node_or_null(nombre_nodo)
-		if Global.visited_tiles.has(Vector2i(tileMap[x][y]["bottomRight"].x, tileMap[x][y]["bottomRight"].y)):
-			changeColor(tileMap[x][y]["bottomRight"].x,tileMap[x][y]["bottomRight"].y,3)
-		else:
-			changeColor(tileMap[x][y]["bottomRight"].x, tileMap[x][y]["bottomRight"].y,1)
-			enableHexagon(tileMap[x][y]["bottomRight"].x, tileMap[x][y]["bottomRight"].y)
-			changeText(tileMap[x][y]["bottomRight"].x, tileMap[x][y]["bottomRight"].y,1)
+		controlTheHexagon(x,y,"bottomRight")
 	#AbajoIzquierda
 	if(tileMap[x][y]["bottomLeft"] != null):
-		#var nombre_nodo = "../HexagonalTiles/T" + str(tileMap[x][y]["bottomLeft"].x) + str(tileMap[x][y]["bottomLeft"].y)
-		#var nodoBL = get_node_or_null(nombre_nodo)
-		if Global.visited_tiles.has(Vector2i(tileMap[x][y]["bottomLeft"].x, tileMap[x][y]["bottomLeft"].y)):
-			changeColor(tileMap[x][y]["bottomLeft"].x,tileMap[x][y]["bottomLeft"].y,3)
-		else:
-			changeColor(tileMap[x][y]["bottomLeft"].x, tileMap[x][y]["bottomLeft"].y,1)
-			enableHexagon(tileMap[x][y]["bottomLeft"].x, tileMap[x][y]["bottomLeft"].y)
-			changeText(tileMap[x][y]["bottomLeft"].x, tileMap[x][y]["bottomLeft"].y,1)
+		controlTheHexagon(x,y,"bottomLeft")
+
 	
 
 func start_matrix() -> void:
@@ -170,18 +137,31 @@ func get_weighted_random() -> String:
 			return Global.types[i]
 	return Global.types[-1]  # fallback (por si hay redondeo)
 	
-func get_challenge(x:int, y:int) -> float:
+func get_challenge(x:int, y:int) -> int:
 	var rand = randf() + 1
 	var challenge
 	#para el boss
 	if(x != 6 && x !=4):
-		challenge = Global.nivel * ((x+1)*0.2) * ((y+1)*0.2) * Global.reto * 2 * rand
+		challenge = round(Global.nivel * ((x+1)*0.2) * ((y+1)*0.2) * Global.reto * rand + 1)
 	else:
-		challenge = Global.nivel * ((x+1)*0.2) * ((y+1)*0.2) * Global.reto * rand
+		challenge = round(Global.nivel * ((x+1)*0.2) * ((y+1)*0.2) * Global.reto * rand * 2)
 	return challenge
 	
 func get_reward(evento: String) -> float:
-	return 0.2*Global.nivel
+	match evento:
+		"HealthA":
+			return 1*Global.nivel
+		"HealthS":
+			return 1*Global.nivel
+		"HealthC":
+			return 1*Global.nivel
+		"Attack":
+			return 1*Global.nivel
+		"Speed":
+			return 0.2 * Global.nivel
+		"Critical":
+			return 0.05
+	return 0.2
 	
 func generate_array(x: int, y: int, v: int) -> Dictionary:
 	var nombre_nodo = "../HexagonalTiles/T" + str(y) + str(x)
@@ -194,8 +174,6 @@ func generate_array(x: int, y: int, v: int) -> Dictionary:
 		evento = get_weighted_random()
 	var cantidad = get_challenge(x,y)
 	var reward = get_reward(evento)
-	if (evento == "Critical"):
-		reward = reward/4
 		
 	#Inicia la Tile
 	if nodo and nodo.has_method("setValues"):
@@ -317,39 +295,40 @@ func fight() -> void:
 			"Speed": player.setSpeed(Global.enemyReward)
 			"Critical": player.setCritical(Global.enemyReward)
 			"HealthA", "HealthS", "HealthC": player.setHealth(Global.enemyReward)
+		if tileMap[pos.x][pos.y]["type"] == "Boss":
+			Global.nivel += + 1
+			Global.reto *= 1.6
+			Global.gHealth = player.getHealth()
+			Global.gAttack = player.getAttack()
+			Global.gSpeed = player.getSpeed()
+			Global.gCritical = player.getCritical()
+			Global.visited_tiles.clear()
+			reseteaTablero()
+			changeBlocked()
+			Global.combatDone = true
+			Global.posJugador = Vector2(0,0)
+			get_tree().change_scene_to_file("res://src/scenes/baseMap.tscn")
+			return  # No continuar tras cambiar escena
+
+		# Movimiento válido: Mover al jugador y marcar casilla como visitada
+		var prev_tile = Global.posJugador
+		player.position = tile_node.position
+
+		var prev_tile_vec = Vector2i(prev_tile.x, prev_tile.y)
+		if not Global.visited_tiles.has(prev_tile_vec):
+			Global.visited_tiles.append(prev_tile_vec)
+
+		# Se marca como bloqueada para que no se pueda regresar
+		tile_node.is_blocked = true
+
+		reseteaTablero()
+		activeHexagons(pos.x, pos.y)
+		Global.posJugador = pos
 	else:
 		player.setHealth(-1)
 		anim_h.play("shake_and_scale")
 		oof.play()
 		await get_tree().create_timer(0.5).timeout
-
-	if tileMap[pos.x][pos.y]["type"] == "Boss":
-		Global.nivel = 2
-		Global.reto *= 1.6
-		Global.gHealth = player.getHealth()
-		Global.gAttack = player.getAttack()
-		Global.gSpeed = player.getSpeed()
-		Global.gCritical = player.getCritical()
-		Global.visited_tiles.clear()
-		reseteaTablero()
-		changeBlocked()
-		Global.combatDone = true
-		Global.posJugador = Vector2(0,0)
-		get_tree().change_scene_to_file("res://src/scenes/baseMap.tscn")
-		return  # No continuar tras cambiar escena
-
-	# Movimiento válido: Mover al jugador y marcar casilla como visitada
-	var prev_tile = Global.posJugador
-	player.position = tile_node.position
-
-	var prev_tile_vec = Vector2i(prev_tile.x, prev_tile.y)
-	if not Global.visited_tiles.has(prev_tile_vec):
-		Global.visited_tiles.append(prev_tile_vec)
-
-	# Se marca como bloqueada para que no se pueda regresar
-	tile_node.is_blocked = true
-
-	reseteaTablero()
-	activeHexagons(pos.x, pos.y)
+		
 	Global.combatDone = true
-	Global.posJugador = pos
+	

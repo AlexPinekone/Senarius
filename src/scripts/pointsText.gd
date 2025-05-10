@@ -7,9 +7,9 @@ var DiceValue
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Num = 0
-	DiceValue = 1
+	DiceValue = 0
 
-func setDice(val : float) -> void:
+func setDice(val : int) -> void:
 	DiceValue = val
 
 func setNum(val : float) -> void:
@@ -23,7 +23,7 @@ func setNumCero() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var vT = "%.3f" % Num
-	var hS : Array = vT.split("")  # Esto da un array de letras
-	points.bbcode_text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]" + hS[0] + " "+ hS[1] + hS[2]+ " " + hS[3]+"[/color][/wave]"
+	#var vT = "%.3f" % Num
+	#var hS : Array = vT.split("")  # Esto da un array de letras
+	points.bbcode_text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]" + str(Num) +"[/color][/wave]"
 	result.bbcode_text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]" + str(DiceValue) +"[/color][/wave]"

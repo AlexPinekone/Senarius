@@ -18,7 +18,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func setValues(x:int, y:int, tipo: String, cantidad: float, reward: float) -> void:
+func setValues(x:int, y:int, tipo: String, cantidad: int, reward: float) -> void:
 	ValueX = x
 	ValueY = y
 	Type = tipo
@@ -34,7 +34,7 @@ func changeContent(m: int) -> void:
 			"Attack":
 				label.add_theme_color_override("font_color", Color.RED)
 			"Speed":
-				label.add_theme_color_override("font_color", Color.BLUE)
+				label.add_theme_color_override("font_color", Color8(135,206,235))
 			"Critical":
 				label.add_theme_color_override("font_color", Color.ORANGE)
 			"HealthA":
@@ -49,7 +49,7 @@ func changeContent(m: int) -> void:
 				label.add_theme_color_override("font_color", Color.PURPLE)
 			_:
 				label.add_theme_color_override("font_color", Color.GRAY)
-		label.text = "%.2f" %Amount
+		label.text = "%d" %Amount
 
 func _on_button_pressed() -> void:
 	Global.pressed = true;
