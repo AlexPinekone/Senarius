@@ -7,6 +7,7 @@ var enemyReward = 0
 var enemyType = ""
 var posJugador = Vector2()
 var visited_tiles: Array = []
+var totalPoints = 0
 #Matematicas
 var nivel = 1
 var reto = 1
@@ -43,3 +44,24 @@ var weights = [
 	0.25, 	#Step
 	0.10 	#Blank
 ]
+
+
+func resetValues():
+	nivel = 1
+	reto = 1
+	gHealth = 6
+	gAttack = 1
+	gSpeed = 1
+	gCritical = 0.05
+	gPoint = 0
+	gSteps = 9
+	gTempSteps = 0
+	pressed = false;
+	posPressed = Vector2(-1,-1);
+	enemyValue = 0
+	enemyReward = 0
+	enemyType = ""
+	posJugador = Vector2(0,0)
+	visited_tiles = []
+	totalPoints = 0
+	combatDone = true;

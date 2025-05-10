@@ -22,6 +22,7 @@ const MATX = 7
 const MATY = 6
 var tileMap = []
 var retoLocal = round((Global.nivel + round(Global.nivel*5/3))*(1 + 0.3*Global.nivel))-(1+Global.nivel)
+var changing = false
 
 #Al inicio
 func _ready() -> void:
@@ -247,6 +248,15 @@ func _process(delta: float) -> void:
 		Global.pressed = false
 		Global.combatDone = false
 		
+		if (player.getHealth() <= 0 || (player.getSteps() <= 0 && changing == false)):
+			transition_anim_exit.play("SceneExit")
+			await get_tree().create_timer(3).timeout
+			Global.visited_tiles.clear()
+			reseteaTablero()
+			Global.combatDone = true
+			Global.posJugador = Vector2(0,0)
+			get_tree().change_scene_to_file("res://src/scenes/gameover.tscn")
+		
 		#Espera a que se hagan los cálculos
 		if (player.getSteps() > 0):
 			fight()
@@ -311,6 +321,7 @@ func fight() -> void:
 		result *= 3
 
 	if result >= Global.enemyValue:
+		Global.totalPoints += result
 		match tileMap[pos.x][pos.y]["type"]:
 			"Attack": player.setAttack(Global.enemyReward)
 			"Speed": player.setSpeed(Global.enemyReward)
@@ -319,6 +330,7 @@ func fight() -> void:
 			"HealthA", "HealthS", "HealthC": player.setHealth(Global.enemyReward)
 			_: pass
 		if tileMap[pos.x][pos.y]["type"] == "Boss":
+			changing = true
 			Global.nivel += 1
 			Global.reto *= retoLocal
 			Global.gHealth = player.getHealth()

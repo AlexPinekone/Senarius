@@ -1,14 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://bryx1072v71l3"]
+[gd_scene load_steps=20 format=3 uid="uid://c2dc66o40idfe"]
 
-[ext_resource type="Script" uid="uid://4sanhmglp3s0" path="res://src/scripts/main_menu.gd" id="1_chlrs"]
-[ext_resource type="Shader" uid="uid://b4yhybxijnkyx" path="res://src/shaders/baseMap.gdshader" id="1_iaawh"]
-[ext_resource type="Shader" uid="uid://df05qhb2jqedw" path="res://src/scenes/dissolve_exit.gdshader" id="2_kp3xf"]
-[ext_resource type="Shader" uid="uid://ohcp0sf4331j" path="res://src/shaders/disolve_shader_load.gdshader" id="3_chlrs"]
-[ext_resource type="Shader" uid="uid://b0vng7tegl2kx" path="res://src/shaders/vhs.gdshader" id="4_yrdre"]
-[ext_resource type="FontFile" uid="uid://jrdb2urrngxx" path="res://src/fonts/ARCADECLASSIC.TTF" id="5_kp3xf"]
+[ext_resource type="Script" uid="uid://biq5gqgve4jrs" path="res://src/scripts/gameover.gd" id="1_d30la"]
+[ext_resource type="Shader" uid="uid://b4yhybxijnkyx" path="res://src/shaders/baseMap.gdshader" id="2_3c2xy"]
+[ext_resource type="FontFile" uid="uid://jrdb2urrngxx" path="res://src/fonts/ARCADECLASSIC.TTF" id="3_wvlxu"]
+[ext_resource type="Shader" uid="uid://ohcp0sf4331j" path="res://src/shaders/disolve_shader_load.gdshader" id="4_bvxdo"]
+[ext_resource type="Shader" uid="uid://df05qhb2jqedw" path="res://src/scenes/dissolve_exit.gdshader" id="5_8gkft"]
+[ext_resource type="Shader" uid="uid://b0vng7tegl2kx" path="res://src/shaders/vhs.gdshader" id="6_b2d8q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_klrpn"]
-shader = ExtResource("1_iaawh")
+shader = ExtResource("2_3c2xy")
 shader_parameter/polar_coordinates = false
 shader_parameter/polar_center = Vector2(0.5, 0.5)
 shader_parameter/polar_zoom = 1.0
@@ -41,7 +41,7 @@ corner_radius_bottom_left = 20
 noise = SubResource("FastNoiseLite_ubq7q")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6wcb6"]
-shader = ExtResource("3_chlrs")
+shader = ExtResource("4_bvxdo")
 shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_y0rph")
 shader_parameter/dissolve_value = 1.0
 
@@ -141,12 +141,12 @@ _data = {
 noise = SubResource("FastNoiseLite_1ipax")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n5k5b"]
-shader = ExtResource("2_kp3xf")
+shader = ExtResource("5_8gkft")
 shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_g4job")
 shader_parameter/dissolve_value = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2p8af"]
-shader = ExtResource("4_yrdre")
+shader = ExtResource("6_b2d8q")
 shader_parameter/overlay = true
 shader_parameter/scanlines_opacity = 0.0
 shader_parameter/scanlines_width = 0.0
@@ -169,8 +169,8 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
-[node name="MainMenu" type="Node2D"]
-script = ExtResource("1_chlrs")
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_d30la")
 
 [node name="Fondo" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_klrpn")
@@ -178,55 +178,71 @@ offset_left = -879.0
 offset_top = -299.0
 offset_right = 506.0
 offset_bottom = 483.0
-metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-185, 89)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -548.0
-offset_top = -131.0
-offset_right = 164.0
-offset_bottom = 3.0
+offset_left = -545.0
+offset_top = -195.0
+offset_right = 167.0
+offset_bottom = -61.0
 theme_override_constants/outline_size = 20
-theme_override_fonts/normal_font = ExtResource("5_kp3xf")
+theme_override_fonts/normal_font = ExtResource("3_wvlxu")
 theme_override_font_sizes/normal_font_size = 130
 bbcode_enabled = true
-text = "[wave amp=50.0 freq=5.0 connected=1][color=#ffffff]S E N A R I U S[/color][/wave]"
+text = "[wave amp=50.0 freq=5.0 connected=1][color=#ffffff]GAME  OVER[/color][/wave]"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PointsT" type="RichTextLabel" parent="."]
+offset_left = -531.0
+offset_top = -65.0
+offset_right = 181.0
+offset_bottom = 69.0
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("3_wvlxu")
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0 connected=1][color=#ffffff]Total points: [/color][/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Points" type="RichTextLabel" parent="."]
+offset_left = -534.0
+offset_top = 35.0
+offset_right = 178.0
+offset_bottom = 169.0
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("3_wvlxu")
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0 connected=1][color=#ffffff]0 [/color][/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="ButtonStart" type="Button" parent="."]
-offset_left = -312.0
-offset_top = 112.0
-offset_right = -67.0
-offset_bottom = 181.0
-theme_override_fonts/font = ExtResource("5_kp3xf")
+offset_left = -308.0
+offset_top = 174.0
+offset_right = -63.0
+offset_bottom = 243.0
+theme_override_fonts/font = ExtResource("3_wvlxu")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/hover = SubResource("StyleBoxFlat_chlrs")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_chlrs")
 theme_override_styles/normal = SubResource("StyleBoxFlat_chlrs")
 text = "  START"
 
-[node name="ButtonCredits" type="Button" parent="."]
-offset_left = -311.0
-offset_top = 194.0
-offset_right = -66.0
-offset_bottom = 263.0
-theme_override_fonts/font = ExtResource("5_kp3xf")
-theme_override_font_sizes/font_size = 60
-theme_override_styles/hover = SubResource("StyleBoxFlat_chlrs")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_chlrs")
-theme_override_styles/normal = SubResource("StyleBoxFlat_chlrs")
-text = " CREDITS"
-
 [node name="ButtonExit" type="Button" parent="."]
-offset_left = -312.0
-offset_top = 276.0
-offset_right = -67.0
-offset_bottom = 345.0
-theme_override_fonts/font = ExtResource("5_kp3xf")
+offset_left = -311.0
+offset_top = 273.0
+offset_right = -66.0
+offset_bottom = 342.0
+theme_override_fonts/font = ExtResource("3_wvlxu")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/hover = SubResource("StyleBoxFlat_chlrs")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_chlrs")
@@ -235,9 +251,9 @@ text = "EXIT"
 
 [node name="TransitionEnter" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_6wcb6")
-offset_left = -911.0
+offset_left = -905.0
 offset_top = 539.0
-offset_right = 489.0
+offset_right = 495.0
 offset_bottom = 1339.0
 mouse_filter = 2
 color = Color(0.136826, 0.136826, 0.136826, 1)
@@ -250,9 +266,9 @@ autoplay = "SceneEnter"
 
 [node name="TransitionExit" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_n5k5b")
-offset_left = -903.0
+offset_left = -905.0
 offset_top = 539.0
-offset_right = 497.0
+offset_right = 495.0
 offset_bottom = 1339.0
 mouse_filter = 2
 color = Color(0.136826, 0.136826, 0.136826, 1)
@@ -279,5 +295,4 @@ grow_vertical = 2
 mouse_filter = 2
 
 [connection signal="pressed" from="ButtonStart" to="." method="_on_button_start_pressed"]
-[connection signal="pressed" from="ButtonCredits" to="." method="_on_button_credits_pressed"]
 [connection signal="pressed" from="ButtonExit" to="." method="_on_button_exit_pressed"]
