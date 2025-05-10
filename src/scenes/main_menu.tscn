@@ -1,0 +1,282 @@
+[gd_scene load_steps=20 format=3 uid="uid://bryx1072v71l3"]
+
+[ext_resource type="Script" uid="uid://4sanhmglp3s0" path="res://src/scripts/main_menu.gd" id="1_chlrs"]
+[ext_resource type="Shader" uid="uid://b4yhybxijnkyx" path="res://src/shaders/baseMap.gdshader" id="1_iaawh"]
+[ext_resource type="Shader" uid="uid://df05qhb2jqedw" path="res://src/scenes/dissolve_exit.gdshader" id="2_kp3xf"]
+[ext_resource type="Shader" uid="uid://ohcp0sf4331j" path="res://src/shaders/disolve_shader_load.gdshader" id="3_chlrs"]
+[ext_resource type="Shader" uid="uid://b0vng7tegl2kx" path="res://src/shaders/vhs.gdshader" id="4_yrdre"]
+[ext_resource type="FontFile" uid="uid://jrdb2urrngxx" path="res://src/fonts/ARCADECLASSIC.TTF" id="5_kp3xf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_klrpn"]
+shader = ExtResource("1_iaawh")
+shader_parameter/polar_coordinates = false
+shader_parameter/polar_center = Vector2(0.5, 0.5)
+shader_parameter/polar_zoom = 1.0
+shader_parameter/polar_repeat = 1.0
+shader_parameter/spin_rotation = 0.0
+shader_parameter/spin_speed = 4.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/colour_1 = Color(0.263351, 0.000549461, 0.674299, 1)
+shader_parameter/colour_2 = Color(0.780392, 0, 0.0196078, 1)
+shader_parameter/colour_3 = Color(0, 0, 0, 1)
+shader_parameter/contrast = 2.0
+shader_parameter/spin_amount = 0.36
+shader_parameter/pixel_filter = 700.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chlrs"]
+bg_color = Color(0.265608, 0.000372821, 0.371351, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ubq7q"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y0rph"]
+noise = SubResource("FastNoiseLite_ubq7q")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6wcb6"]
+shader = ExtResource("3_chlrs")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_y0rph")
+shader_parameter/dissolve_value = 1.0
+
+[sub_resource type="Animation" id="Animation_bic2n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-905, 539)]
+}
+
+[sub_resource type="Animation" id="Animation_y0rph"]
+resource_name = "SceneEnter"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-911, 539), Vector2(-911, 539), Vector2(-895.045, -308.47)]
+}
+
+[sub_resource type="Animation" id="Animation_eic6s"]
+resource_name = "SceneExit"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-903, 539), Vector2(-890, -309)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0rph"]
+_data = {
+&"RESET": SubResource("Animation_bic2n"),
+&"SceneEnter": SubResource("Animation_y0rph"),
+&"SceneExit": SubResource("Animation_eic6s")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1ipax"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g4job"]
+noise = SubResource("FastNoiseLite_1ipax")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n5k5b"]
+shader = ExtResource("2_kp3xf")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_g4job")
+shader_parameter/dissolve_value = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2p8af"]
+shader = ExtResource("4_yrdre")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(1280, 760)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 3.0
+shader_parameter/roll_size = 8.0
+shader_parameter/roll_variation = 0.286
+shader_parameter/distort_intensity = 0.006
+shader_parameter/noise_opacity = 0.1
+shader_parameter/noise_speed = 1.0
+shader_parameter/static_noise_intensity = 0.0
+shader_parameter/aberration = 0.00100005
+shader_parameter/brightness = 1.6
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.4
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_chlrs")
+
+[node name="Fondo" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_klrpn")
+offset_left = -879.0
+offset_top = -299.0
+offset_right = 506.0
+offset_bottom = 483.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-185, 89)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -548.0
+offset_top = -131.0
+offset_right = 164.0
+offset_bottom = 3.0
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("5_kp3xf")
+theme_override_font_sizes/normal_font_size = 130
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0 connected=1][color=#ffffff]S E N A R I U S[/color][/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonStart" type="Button" parent="."]
+offset_left = -312.0
+offset_top = 112.0
+offset_right = -67.0
+offset_bottom = 181.0
+theme_override_fonts/font = ExtResource("5_kp3xf")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/hover = SubResource("StyleBoxFlat_chlrs")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_chlrs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_chlrs")
+text = "  START"
+
+[node name="ButtonCredits" type="Button" parent="."]
+offset_left = -311.0
+offset_top = 194.0
+offset_right = -66.0
+offset_bottom = 263.0
+theme_override_fonts/font = ExtResource("5_kp3xf")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/hover = SubResource("StyleBoxFlat_chlrs")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_chlrs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_chlrs")
+text = " CREDITS"
+
+[node name="ButtonExit" type="Button" parent="."]
+offset_left = -312.0
+offset_top = 276.0
+offset_right = -67.0
+offset_bottom = 345.0
+theme_override_fonts/font = ExtResource("5_kp3xf")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/hover = SubResource("StyleBoxFlat_chlrs")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_chlrs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_chlrs")
+text = "EXIT"
+
+[node name="TransitionEnter" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_6wcb6")
+offset_left = -911.0
+offset_top = 539.0
+offset_right = 489.0
+offset_bottom = 1339.0
+mouse_filter = 2
+color = Color(0.136826, 0.136826, 0.136826, 1)
+
+[node name="TransitionAnimEnter" type="AnimationPlayer" parent="TransitionEnter"]
+libraries = {
+&"": SubResource("AnimationLibrary_y0rph")
+}
+autoplay = "SceneEnter"
+
+[node name="TransitionExit" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_n5k5b")
+offset_left = -903.0
+offset_top = 539.0
+offset_right = 497.0
+offset_bottom = 1339.0
+mouse_filter = 2
+color = Color(0.136826, 0.136826, 0.136826, 1)
+
+[node name="TransitionAnimExit" type="AnimationPlayer" parent="TransitionExit"]
+libraries = {
+&"": SubResource("AnimationLibrary_y0rph")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_2p8af")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -825.0
+offset_top = -270.0
+offset_right = -825.0
+offset_bottom = -270.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="ButtonStart" to="." method="_on_button_start_pressed"]
+[connection signal="pressed" from="ButtonCredits" to="." method="_on_button_credits_pressed"]
+[connection signal="pressed" from="ButtonExit" to="." method="_on_button_exit_pressed"]

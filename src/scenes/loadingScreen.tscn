@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcmq1mlkn5eob"]
+[gd_scene load_steps=8 format=3 uid="uid://dcmq1mlkn5eob"]
 
 [ext_resource type="Script" uid="uid://d3fujsatha6bo" path="res://src/scripts/loading_screen.gd" id="1_fibsv"]
 [ext_resource type="PackedScene" uid="uid://cb6m1sjbf1232" path="res://src/scenes/tile.tscn" id="2_j3hct"]
+[ext_resource type="Shader" uid="uid://b0vng7tegl2kx" path="res://src/shaders/vhs.gdshader" id="3_5102s"]
 
 [sub_resource type="Animation" id="Animation_hrqqn"]
 length = 0.001
@@ -40,6 +41,30 @@ _data = {
 &"loading": SubResource("Animation_5102s")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hrqqn"]
+shader = ExtResource("3_5102s")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(1280, 760)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 3.0
+shader_parameter/roll_size = 8.0
+shader_parameter/roll_variation = 0.286
+shader_parameter/distort_intensity = 0.006
+shader_parameter/noise_opacity = 0.1
+shader_parameter/noise_speed = 1.0
+shader_parameter/static_noise_intensity = 0.0
+shader_parameter/aberration = 0.00100005
+shader_parameter/brightness = 1.6
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.4
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_fibsv")
 
@@ -50,7 +75,7 @@ offset_left = -723.0
 offset_top = -383.0
 offset_right = 677.0
 offset_bottom = 417.0
-color = Color(0.136826, 0.136826, 0.136826, 1)
+color = Color(0.137255, 0.137255, 0.137255, 1)
 
 [node name="Tile" parent="." instance=ExtResource("2_j3hct")]
 modulate = Color(1, 1, 1, 0.218085)
@@ -63,3 +88,19 @@ libraries = {
 &"": SubResource("AnimationLibrary_wg7x4")
 }
 autoplay = "loading"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_hrqqn")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -639.0
+offset_top = -359.0
+offset_right = -639.0
+offset_bottom = -359.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

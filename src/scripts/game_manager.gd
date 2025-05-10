@@ -21,6 +21,7 @@ extends Node2D
 const MATX = 7
 const MATY = 6
 var tileMap = []
+var retoLocal = round((Global.nivel + round(Global.nivel*5/3))*(1 + 0.3*Global.nivel))-(1+Global.nivel)
 
 #Al inicio
 func _ready() -> void:
@@ -142,28 +143,40 @@ func get_weighted_random() -> String:
 			return Global.types[i]
 	return Global.types[-1]  # fallback (por si hay redondeo)
 	
-func get_challenge(x:int, y:int) -> int:
-	var rand = randf() + 1
+func get_challenge(y:int, x:int) -> int:
 	var challenge
-	#para el boss
-	if(x != 6 && x !=4):
-		challenge = round(Global.nivel * ((x+1)*0.2) * ((y+1)*0.2) * Global.reto * rand + 1)
+	var rand
+	if ((x == 0 && y == 1 && Global.nivel == 1)||(x == 1 && y == 0 && Global.nivel == 1)||(x == 1 && y == 1 && Global.nivel == 1)):
+		rand = 1
 	else:
-		challenge = round(Global.nivel * ((x+1)*0.2) * ((y+1)*0.2) * Global.reto * rand * 2)
+		rand = randi_range(-1, 1)
+	var retoB = retoLocal
+	var multLejano
+	if (x > y):
+		multLejano = x
+	else:
+		multLejano = y
+	#para el boss
+	if(x == 6 && y ==4):
+		challenge = (retoB) * 4
+		if(Global.nivel == 1):
+			challenge = 10
+	else:
+		challenge = retoB + (multLejano-1)*Global.nivel + rand
 	return challenge
 	
 func get_reward(evento: String) -> float:
 	match evento:
 		"HealthA":
-			return 1*Global.nivel
+			return 1
 		"HealthS":
-			return 1*Global.nivel
+			return 1
 		"HealthC":
-			return 1*Global.nivel
+			return 1
 		"Attack":
 			return 1*Global.nivel
 		"Speed":
-			return 0.2 * Global.nivel
+			return 0.1
 		"Critical":
 			return 0.05
 		"Steps":
@@ -306,8 +319,8 @@ func fight() -> void:
 			"HealthA", "HealthS", "HealthC": player.setHealth(Global.enemyReward)
 			_: pass
 		if tileMap[pos.x][pos.y]["type"] == "Boss":
-			Global.nivel += + 1
-			Global.reto *= 1.6
+			Global.nivel += 1
+			Global.reto *= retoLocal
 			Global.gHealth = player.getHealth()
 			Global.gAttack = player.getAttack()
 			Global.gSpeed = player.getSpeed()

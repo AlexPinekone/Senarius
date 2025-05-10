@@ -9,12 +9,12 @@ var posJugador = Vector2()
 var visited_tiles: Array = []
 #Matematicas
 var nivel = 1
-var reto = 4
+var reto = 1
 
 #Cambio de nivel
 var gHealth = 6
 var gAttack = 1
-var gSpeed = 10
+var gSpeed = 1
 var gCritical = 0.05
 var gPoint = 0
 var gSteps = 9
