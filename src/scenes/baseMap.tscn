@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://v0uc2yko34gl"]
+[gd_scene load_steps=36 format=3 uid="uid://v0uc2yko34gl"]
 
 [ext_resource type="PackedScene" uid="uid://dum6a02wasa3a" path="res://src/sprites/manyHx.tscn" id="2_eic6s"]
 [ext_resource type="Script" uid="uid://bdg4iibow25if" path="res://src/scripts/hexagonal_tiles.gd" id="2_ihm57"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://blrqv1ckmg58f" path="res://src/tiles/HUD Menus.png" id="14_x7cn1"]
 [ext_resource type="Shader" uid="uid://ohcp0sf4331j" path="res://src/shaders/disolve_shader_load.gdshader" id="16_bic2n"]
 [ext_resource type="Shader" uid="uid://df05qhb2jqedw" path="res://src/scenes/dissolve_exit.gdshader" id="16_y0rph"]
+[ext_resource type="Shader" uid="uid://b0vng7tegl2kx" path="res://src/shaders/vhs.gdshader" id="18_g4job"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hn2dp"]
 shader = ExtResource("3_q1pjq")
@@ -27,8 +28,8 @@ shader_parameter/polar_repeat = 1.0
 shader_parameter/spin_rotation = 0.0
 shader_parameter/spin_speed = 4.0
 shader_parameter/offset = Vector2(0, 0)
-shader_parameter/colour_1 = Color(1, 0, 0, 1)
-shader_parameter/colour_2 = Color(0.321569, 0, 0.462745, 1)
+shader_parameter/colour_1 = Color(0.263351, 0.000549461, 0.674299, 1)
+shader_parameter/colour_2 = Color(0.780392, 0, 0.0196078, 1)
 shader_parameter/colour_3 = Color(0, 0, 0, 1)
 shader_parameter/contrast = 2.0
 shader_parameter/spin_amount = 0.36
@@ -357,10 +358,10 @@ tracks/1/path = NodePath(".:position")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.0001, 0.0333333),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-911, 539), Vector2(-905, -296)]
+"values": [Vector2(-911, 539), Vector2(-911, 539), Vector2(-905, -296)]
 }
 
 [sub_resource type="Animation" id="Animation_eic6s"]
@@ -407,6 +408,30 @@ noise = SubResource("FastNoiseLite_bic2n")
 shader = ExtResource("16_bic2n")
 shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_y0rph")
 shader_parameter/dissolve_value = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o7kuv"]
+shader = ExtResource("18_g4job")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(1280, 760)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 3.0
+shader_parameter/roll_size = 8.0
+shader_parameter/roll_variation = 0.286
+shader_parameter/distort_intensity = 0.006
+shader_parameter/noise_opacity = 0.1
+shader_parameter/noise_speed = 1.0
+shader_parameter/static_noise_intensity = 0.0
+shader_parameter/aberration = 0.00100005
+shader_parameter/brightness = 1.6
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.4
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
 
 [node name="Node2D" type="Node2D"]
 
@@ -881,3 +906,19 @@ libraries = {
 &"": SubResource("AnimationLibrary_y0rph")
 }
 autoplay = "SceneEnter"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_o7kuv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -835.0
+offset_top = -267.0
+offset_right = -835.0
+offset_bottom = -267.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
