@@ -24,6 +24,7 @@ const MATY = 6
 var tileMap = []
 var retoLocal = round((Global.nivel + round(Global.nivel*5/3))*(1 + 0.3*Global.nivel))-(1+Global.nivel)
 var changing = false
+var encerrado = false
 
 #Al inicio
 func _ready() -> void:
@@ -245,13 +246,38 @@ func get_random_critical() -> bool:
 		res = true
 	return res
 
+func checkEncerrado(x:int, y:int) -> void:
+	var cont = 0
+	cont += checkIndividualDirection(x,y,"top")
+	cont += checkIndividualDirection(x,y,"bottom")
+	cont += checkIndividualDirection(x,y,"topRight")
+	cont += checkIndividualDirection(x,y,"topLeft")
+	cont += checkIndividualDirection(x,y,"bottomRight")
+	cont += checkIndividualDirection(x,y,"bottomLeft")
+	
+	if (cont == 5):
+		encerrado = true
+	else:
+		encerrado = false
+
+func checkIndividualDirection(x: int ,y: int, name: String) -> int:
+	if(tileMap[x][y][name]):
+		var comp = Vector2(tileMap[x][y][name].x, tileMap[x][y][name].y)
+		if comp in Global.visited_tiles:
+			print("Bloqueado: ",name)
+			return 1
+		else:
+			return 0
+	else:
+		return 0
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if(Global.pressed && Global.combatDone):
 		Global.pressed = false
 		Global.combatDone = false
 		
-		if (player.getHealth() <= 0 || (player.getSteps() <= 0 && changing == false)):
+		if (player.getHealth() <= 0 || (player.getSteps() <= 0 && changing == false) || encerrado):
 			transition_anim_exit.play("SceneExit")
 			await get_tree().create_timer(3).timeout
 			Global.visited_tiles.clear()
@@ -372,6 +398,8 @@ func fight() -> void:
 		reseteaTablero()
 		activeHexagons(pos.x, pos.y)
 		Global.posJugador = pos
+		
+		checkEncerrado(pos.x,pos.y)
 	else:
 		player.setHealth(-1)
 		anim_h.play("shake_and_scale")
