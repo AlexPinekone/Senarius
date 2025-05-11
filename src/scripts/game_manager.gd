@@ -5,6 +5,7 @@ extends Node2D
 @onready var dice_sound: AudioStreamPlayer2D = $"../DiceSound"
 @onready var charge_sound: AudioStreamPlayer2D = $"../ChargeSound"
 @onready var oof: AudioStreamPlayer2D = $"../Oof"
+@onready var win: AudioStreamPlayer2D = $"../Win"
 @onready var points: RichTextLabel = $"../UI/Points"
 @onready var transition_anim_exit: AnimationPlayer = $"../TransitionExit/TransitionAnimExit"
 
@@ -324,6 +325,7 @@ func fight() -> void:
 
 	if result >= Global.enemyValue:
 		Global.totalPoints += result
+		win.play()
 		match tileMap[pos.x][pos.y]["type"]:
 			"Attack": player.setAttack(Global.enemyReward)
 			"Speed": player.setSpeed(Global.enemyReward)

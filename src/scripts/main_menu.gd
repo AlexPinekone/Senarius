@@ -20,7 +20,9 @@ func _on_button_start_pressed() -> void:
 
 
 func _on_button_credits_pressed() -> void:
-	pass # Replace with function body.
+	transition_anim_exit.play("SceneExit")
+	await get_tree().create_timer(3).timeout
+	get_tree().change_scene_to_file("res://src/scenes/credits/credits1.tscn")
 
 
 func _on_button_exit_pressed() -> void:

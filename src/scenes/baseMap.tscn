@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://v0uc2yko34gl"]
+[gd_scene load_steps=37 format=3 uid="uid://v0uc2yko34gl"]
 
 [ext_resource type="PackedScene" uid="uid://dum6a02wasa3a" path="res://src/sprites/manyHx.tscn" id="2_eic6s"]
 [ext_resource type="Script" uid="uid://bdg4iibow25if" path="res://src/scripts/hexagonal_tiles.gd" id="2_ihm57"]
@@ -12,8 +12,9 @@
 [ext_resource type="Script" uid="uid://dewpkj6dratsv" path="res://src/scripts/pointsText.gd" id="7_3cycs"]
 [ext_resource type="AudioStream" uid="uid://uoseppn01dip" path="res://src/sounds/Dice-Rolling-Sound-Effect.wav" id="8_l5y5f"]
 [ext_resource type="AudioStream" uid="uid://bqol8ohepxt0p" path="res://src/sounds/Video-Game-Charge-Up-Sound-Sound-Effect-_HQ_.wav" id="10_0is84"]
-[ext_resource type="AudioStream" uid="uid://dp8irtook3c7g" path="res://src/sounds/ROBLOX Oof Sound Effect.wav" id="13_u3dtf"]
 [ext_resource type="PackedScene" uid="uid://felujqfdkoer" path="res://src/scenes/restar_button.tscn" id="13_x7cn1"]
+[ext_resource type="AudioStream" uid="uid://bvcdthgewjpvv" path="res://src/sounds/new/764796__at0mcat__wrong.ogg" id="14_g4job"]
+[ext_resource type="AudioStream" uid="uid://ca8xpwkdvc8rx" path="res://src/sounds/new/442327__bolkmar__fx-retro-videogame-click-menu-option.wav" id="14_o7kuv"]
 [ext_resource type="Texture2D" uid="uid://blrqv1ckmg58f" path="res://src/tiles/HUD Menus.png" id="14_x7cn1"]
 [ext_resource type="Shader" uid="uid://ohcp0sf4331j" path="res://src/shaders/disolve_shader_load.gdshader" id="16_bic2n"]
 [ext_resource type="Shader" uid="uid://df05qhb2jqedw" path="res://src/scenes/dissolve_exit.gdshader" id="16_y0rph"]
@@ -871,8 +872,13 @@ stream = ExtResource("8_l5y5f")
 stream = ExtResource("10_0is84")
 volume_db = 10.0
 
+[node name="Win" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_o7kuv")
+volume_db = -6.638
+
 [node name="Oof" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("13_u3dtf")
+stream = ExtResource("14_g4job")
+volume_db = 6.638
 
 [node name="Node2D" parent="." instance=ExtResource("13_x7cn1")]
 position = Vector2(-1000, -103)
