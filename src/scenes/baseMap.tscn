@@ -8,9 +8,9 @@
 [ext_resource type="Script" uid="uid://vkl4k4igem0v" path="res://src/scripts/playerStats.gd" id="5_fguah"]
 [ext_resource type="Script" uid="uid://cf0y6du8k1ul6" path="res://src/scripts/game_manager.gd" id="5_xkm8x"]
 [ext_resource type="PackedScene" uid="uid://cupl85mc5wwnk" path="res://src/scenes/dice.tscn" id="6_7ohmq"]
-[ext_resource type="FontFile" uid="uid://jrdb2urrngxx" path="res://src/fonts/ARCADECLASSIC.TTF" id="6_u3dtf"]
 [ext_resource type="Script" uid="uid://dewpkj6dratsv" path="res://src/scripts/pointsText.gd" id="7_3cycs"]
 [ext_resource type="AudioStream" uid="uid://uoseppn01dip" path="res://src/sounds/Dice-Rolling-Sound-Effect.wav" id="8_l5y5f"]
+[ext_resource type="FontFile" uid="uid://cjdkpqbuu1mm5" path="res://src/fonts/tinypixel.otf" id="8_o7kuv"]
 [ext_resource type="AudioStream" uid="uid://bqol8ohepxt0p" path="res://src/sounds/Video-Game-Charge-Up-Sound-Sound-Effect-_HQ_.wav" id="10_0is84"]
 [ext_resource type="PackedScene" uid="uid://felujqfdkoer" path="res://src/scenes/restar_button.tscn" id="13_x7cn1"]
 [ext_resource type="AudioStream" uid="uid://bvcdthgewjpvv" path="res://src/sounds/new/764796__at0mcat__wrong.ogg" id="14_g4job"]
@@ -579,14 +579,14 @@ script = ExtResource("5_fguah")
 
 [node name="Result" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -660.0
+offset_left = -632.0
 offset_top = -198.0
-offset_right = -460.0
+offset_right = -432.0
 offset_bottom = -90.0
 pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("6_u3dtf")
+theme_override_fonts/normal_font = ExtResource("8_o7kuv")
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
 text = "[wave amp=20.0 freq=8.0 connected=1] [color=#ffffff88]1[/color][/wave]
@@ -611,7 +611,7 @@ offset_bottom = 78.0
 pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("6_u3dtf")
+theme_override_fonts/normal_font = ExtResource("8_o7kuv")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[wave amp=20.0 freq=8.0 connected=1]Steps: [/wave]"
@@ -623,14 +623,14 @@ vertical_alignment = 1
 
 [node name="Steps" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -635.0
+offset_left = -608.0
 offset_top = 10.0
-offset_right = -435.0
+offset_right = -408.0
 offset_bottom = 86.0
 pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("6_u3dtf")
+theme_override_fonts/normal_font = ExtResource("8_o7kuv")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]1[/color][/wave]"
@@ -647,13 +647,13 @@ libraries = {
 
 [node name="PointsT" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -757.0
+offset_left = -762.0
 offset_top = 327.0
-offset_right = -495.0
+offset_right = -500.0
 offset_bottom = 417.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("6_u3dtf")
+theme_override_fonts/normal_font = ExtResource("8_o7kuv")
 theme_override_font_sizes/normal_font_size = 60
 bbcode_enabled = true
 text = "[wave amp=20.0 freq=8.0 connected=1]Total: [/wave]"
@@ -673,7 +673,7 @@ offset_bottom = 434.0
 pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("6_u3dtf")
+theme_override_fonts/normal_font = ExtResource("8_o7kuv")
 theme_override_font_sizes/normal_font_size = 60
 bbcode_enabled = true
 text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]0[/color][/wave]"
@@ -698,7 +698,7 @@ offset_bottom = 15.0
 pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("6_u3dtf")
+theme_override_fonts/normal_font = ExtResource("8_o7kuv")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[wave amp=20.0 freq=8.0 connected=1]Health: [/wave]"
@@ -710,14 +710,14 @@ vertical_alignment = 1
 
 [node name="Health" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -614.0
+offset_left = -593.0
 offset_top = -55.0
-offset_right = -414.0
+offset_right = -393.0
 offset_bottom = 25.0
 pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("6_u3dtf")
+theme_override_fonts/normal_font = ExtResource("8_o7kuv")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]6[/color][/wave]"
@@ -740,7 +740,7 @@ offset_right = -500.0
 offset_bottom = 149.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("6_u3dtf")
+theme_override_fonts/normal_font = ExtResource("8_o7kuv")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[wave amp=20.0 freq=8.0 connected=1]Attack: [/wave]"
@@ -752,14 +752,14 @@ vertical_alignment = 1
 
 [node name="Attack" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -618.0
-offset_top = 82.0
-offset_right = -418.0
-offset_bottom = 151.0
+offset_left = -601.0
+offset_top = 81.0
+offset_right = -401.0
+offset_bottom = 150.0
 pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("6_u3dtf")
+theme_override_fonts/normal_font = ExtResource("8_o7kuv")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[wave amp=20.0 freq=8.0 connected=1] [color=#ffffff88]1[/color][/wave]"
@@ -782,7 +782,7 @@ offset_right = -513.0
 offset_bottom = 212.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("6_u3dtf")
+theme_override_fonts/normal_font = ExtResource("8_o7kuv")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[wave amp=20.0 freq=8.0 connected=1]Speed: [/wave]"
@@ -794,14 +794,14 @@ vertical_alignment = 1
 
 [node name="Speed" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -617.0
+offset_left = -578.0
 offset_top = 147.0
-offset_right = -417.0
+offset_right = -378.0
 offset_bottom = 216.0
 pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("6_u3dtf")
+theme_override_fonts/normal_font = ExtResource("8_o7kuv")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]1.0 0[/color][/wave]"
@@ -824,7 +824,7 @@ offset_right = -490.0
 offset_bottom = 281.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("6_u3dtf")
+theme_override_fonts/normal_font = ExtResource("8_o7kuv")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[wave amp=20.0 freq=8.0 connected=1]Critical: [/wave]"
@@ -836,14 +836,14 @@ vertical_alignment = 1
 
 [node name="Critical" type="RichTextLabel" parent="UI"]
 custom_minimum_size = Vector2(200, 50)
-offset_left = -582.0
+offset_left = -571.0
 offset_top = 215.0
-offset_right = -382.0
+offset_right = -371.0
 offset_bottom = 287.0
 pivot_offset = Vector2(126, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("6_u3dtf")
+theme_override_fonts/normal_font = ExtResource("8_o7kuv")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[wave amp=20.0 freq=8.0 connected=1][color=#ffffff88]0.01[/color][/wave]"

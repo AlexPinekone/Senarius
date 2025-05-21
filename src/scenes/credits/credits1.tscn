@@ -279,7 +279,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_chlrs")
 text = "RETURN"
 
 [node name="TransitionEnter" type="ColorRect" parent="."]
-visible = false
 material = SubResource("ShaderMaterial_6wcb6")
 offset_left = -895.045
 offset_top = -308.47
@@ -309,7 +308,6 @@ libraries = {
 }
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 follow_viewport_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]

@@ -13,14 +13,3 @@ func _on_button_exit_pressed() -> void:
 	transition_anim_exit.play("SceneExit")
 	await get_tree().create_timer(3).timeout
 	get_tree().change_scene_to_file("res://src/scenes/main_menu.tscn")
-
-
-func _on_credits_3_meta_clicked(meta: Variant) -> void:
-	OS.shell_open(meta)
-
-
-func _on_credits_4_meta_clicked(meta: Variant) -> void:
-	OS.shell_open(meta)
-
-func _on_credits_5_meta_clicked(meta: Variant) -> void:
-	OS.shell_open(meta)

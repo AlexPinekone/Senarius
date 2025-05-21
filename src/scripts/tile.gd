@@ -8,6 +8,11 @@ var original_y_rot := 0.0
 @onready var diss: ShaderMaterial = $SubViewportContainer/SubViewport/AnimatedSprite2D.material as ShaderMaterial
 @onready var sprite2d: AnimatedSprite2D = $SubViewportContainer/SubViewport/AnimatedSprite2D
 @onready var audio: AudioStreamPlayer2D = $"../AudioStreamPlayer2D"
+@onready var sr: SubViewportContainer = $SubViewportContainer
+@onready var su: SubViewport = $SubViewportContainer/SubViewport
+@onready var la: Label = $SubViewportContainer/SubViewport/Label
+var tween_hover: Tween
+
 
 var is_blocked: bool = false
 
@@ -39,6 +44,7 @@ func _on_gui_input(event: InputEvent) -> void:
 	shader_material.set_shader_parameter("y_rot", rot_x)
 
 func _on_mouse_exited() -> void:
+	la.rotation = deg_to_rad(0)
 	if is_blocked:
 		return
 
@@ -62,10 +68,12 @@ func _on_button_up() -> void:
 		#marcar_como_bloqueada()
 
 func _on_mouse_entered() -> void:
+	la.rotation = deg_to_rad(180)
 	if is_blocked:
 		return
 		
 	audio.play()
+	
 	
 	
 func start_dissolve():
@@ -89,4 +97,5 @@ func dissolve_over_time(duration: float) ->void:
 		
 		await get_tree().create_timer(0.016).timeout  # ~60fps
 		time_passed += 0.016
+		
 		

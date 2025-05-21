@@ -27,3 +27,9 @@ func _on_button_credits_pressed() -> void:
 
 func _on_button_exit_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_button_how_pressed() -> void:
+	transition_anim_exit.play("SceneExit")
+	await get_tree().create_timer(3).timeout
+	get_tree().change_scene_to_file("res://src/scenes/credits/how1.tscn")
