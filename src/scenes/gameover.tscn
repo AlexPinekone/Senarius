@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://c2dc66o40idfe"]
+[gd_scene load_steps=21 format=3 uid="uid://bibe6klkkry30"]
 
 [ext_resource type="Script" uid="uid://biq5gqgve4jrs" path="res://src/scripts/gameover.gd" id="1_d30la"]
 [ext_resource type="Shader" uid="uid://b4yhybxijnkyx" path="res://src/shaders/baseMap.gdshader" id="2_3c2xy"]
 [ext_resource type="FontFile" uid="uid://jrdb2urrngxx" path="res://src/fonts/ARCADECLASSIC.TTF" id="3_wvlxu"]
+[ext_resource type="FontFile" uid="uid://cjdkpqbuu1mm5" path="res://src/fonts/tinypixel.otf" id="4_3c2xy"]
 [ext_resource type="Shader" uid="uid://ohcp0sf4331j" path="res://src/shaders/disolve_shader_load.gdshader" id="4_bvxdo"]
 [ext_resource type="Shader" uid="uid://df05qhb2jqedw" path="res://src/scenes/dissolve_exit.gdshader" id="5_8gkft"]
 [ext_resource type="Shader" uid="uid://b0vng7tegl2kx" path="res://src/shaders/vhs.gdshader" id="6_b2d8q"]
@@ -202,7 +203,7 @@ offset_top = -65.0
 offset_right = 181.0
 offset_bottom = 69.0
 theme_override_constants/outline_size = 20
-theme_override_fonts/normal_font = ExtResource("3_wvlxu")
+theme_override_fonts/normal_font = ExtResource("4_3c2xy")
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
 text = "[wave amp=50.0 freq=5.0 connected=1][color=#ffffff]Total points: [/color][/wave]"
@@ -216,7 +217,7 @@ offset_top = 35.0
 offset_right = 178.0
 offset_bottom = 169.0
 theme_override_constants/outline_size = 20
-theme_override_fonts/normal_font = ExtResource("3_wvlxu")
+theme_override_fonts/normal_font = ExtResource("4_3c2xy")
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
 text = "[wave amp=50.0 freq=5.0 connected=1][color=#ffffff]0 [/color][/wave]"

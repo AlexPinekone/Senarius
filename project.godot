@@ -13,7 +13,10 @@ config_version=5
 config/name="Senarius"
 run/main_scene="uid://bryx1072v71l3"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/bg_color=Color(0.135244, 0.0485854, 0.310725, 1)
+boot_splash/image="uid://d123u6pi8ksoc"
 config/icon="res://icon.svg"
+boot_splash/stretch/aspect="keep"
 
 [autoload]
 
@@ -25,7 +28,6 @@ BackMusic="*res://src/scenes/backMusic.tscn"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
 
 [rendering]
 
